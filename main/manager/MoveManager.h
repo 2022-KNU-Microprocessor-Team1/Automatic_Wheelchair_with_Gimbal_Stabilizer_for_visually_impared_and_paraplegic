@@ -4,28 +4,6 @@
 #define MAX_WHEEL_ROTATE_SPEED (MAX_PWM_VALUE - 155) //최대 바퀴 회전 속도
 
 /// <summary>
-/// 적외선 통신 핀 정의
-/// </summary>
-namespace ir_comm_pin
-{
-	//TODO : 리모콘 버튼 입력 시 이동
-	const int IR_INPUT;
-
-};
-
-/// <summary>
-/// 바퀴에 대한 핀 정의
-/// </summary>
-namespace wheel_pin
-{
-	const int H_BRIDGE_LEFT_INPUT1 = 11; //H-브릿지 왼쪽 바퀴 입력 핀 1
-	const int H_BRIDGE_LEFT_INPUT2 = 10; //H-브릿지 왼쪽 바퀴 입력 핀 2
-
-	const int H_BRIDGE_RIGHT_INPUT1 = 9; //H-브릿지 오른쪽 바퀴 입력 핀 1
-	const int H_BRIDGE_RIGHT_INPUT2 = 8; //H-브릿지 오른쪽 바퀴 입력 핀 2
-};
-
-/// <summary>
 /// 이동 방향
 /// </summary>
 enum class MOVE_DIRECTION : const int
@@ -48,9 +26,6 @@ public:
 	void MoveTo(MOVE_DIRECTION) const;
 
 private:
-	//상속 시 SINGLETON에서 생성자, 소멸자 접근
-	friend class SINGLETON;
-
 	MOVE_MANAGER();
 	~MOVE_MANAGER();
 };

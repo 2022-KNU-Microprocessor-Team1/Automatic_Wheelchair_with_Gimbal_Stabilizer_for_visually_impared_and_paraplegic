@@ -5,17 +5,6 @@
 #define MAX_HCSR04_CM_RANGE 400 //초음파 거리 센서 최대 측정 가능 범위 (cm 단위)
 
 /// <summary>
-/// 충돌 경고 위한 핀 정의
-/// </summary>
-namespace collision_alert_pin
-{
-	const int HCSR04_BACKWARD_ECHO_INPUT = 13; //후방 장애물 감지 초음파 센서 에코 핀
-	const int HCSR04_FORWARD_ECHO_INPUT = 12; //전방 장애물 감지 초음파 센서 에코 핀
-
-	const int Gl5537_ANALOG_INPUT = 0; //조도 센서 (ANALOG)
-};
-
-/// <summary>
 /// 장애물과의 cm 단위 거리
 /// </summary>
 struct DISTANCE_CM
@@ -42,9 +31,6 @@ private:
 	DISTANCE_CM GetDistanceCmFromHcsr04() const;
 
 private:
-	//상속 시 SINGLETON에서 생성자, 소멸자 접근
-	friend class SINGLETON;
-
 	COLLISION_ALERT_MANAGER();
 	~COLLISION_ALERT_MANAGER();
 };

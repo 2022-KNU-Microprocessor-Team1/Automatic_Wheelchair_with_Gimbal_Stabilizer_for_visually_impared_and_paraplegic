@@ -60,6 +60,11 @@ void COMMON_SHIFT_REG_PWM::SetPwmData(char index, unsigned char pwmData)
 /// </summary>
 void COMMON_SHIFT_REG_PWM::WriteShiftReg() const
 {
+	/***
+		ShiftRegister-PWM-Library의 출력 핀이 역순으로 할당되어 있으므로,
+		0번 출력 핀 => 7번 출력으로 역순으로 출력
+	***/
+
 	for (char i = 0; i < 8; i++)
-		this->_shiftRegPwm.set(i, this->_pwmData[i]);
+		this->_shiftRegPwm.set((8 - i), this->_pwmData[i]);
 }

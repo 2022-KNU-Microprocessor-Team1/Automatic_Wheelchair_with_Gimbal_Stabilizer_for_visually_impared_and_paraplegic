@@ -32,6 +32,23 @@ public:
 
 protected:
 	static INSTANCE_TYPE* _instance; //고유 인스턴스
+
+	/// <summary>
+	/// SINGLTON 생성자
+	/// </summary>
+	SINGLETON()
+	{}
+
+private:
+	// https://docs.microsoft.com/ko-kr/cpp/cpp/copy-constructors-and-copy-assignment-operators-cpp?view=msvc-170
+	// https://docs.microsoft.com/ko-kr/cpp/cpp/copy-constructors-and-copy-assignment-operators-cpp?view=msvc-170
+	//고유 인스턴스에 대한 복사 생성, 대입 방지
+	SINGLETON<INSTANCE_TYPE>(const SINGLETON<INSTANCE_TYPE>&) = delete;
+	SINGLETON<INSTANCE_TYPE>& operator=(const SINGLETON<INSTANCE_TYPE>&) = delete;
+
+	//고유 인스턴스에 대한 이동 생성, 대입 방지
+	SINGLETON<INSTANCE_TYPE>(const SINGLETON<INSTANCE_TYPE>&&) = delete;
+	SINGLETON<INSTANCE_TYPE>& operator=(const SINGLETON<INSTANCE_TYPE>&&) = delete;
 };
 
 template<typename INSTANCE_TYPE>

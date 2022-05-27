@@ -7,14 +7,14 @@
 class WHEELCHAIR
 {
 public:
+	WHEELCHAIR();
+	~WHEELCHAIR();
+
 	void RunTask();
 
 private:
 	class MOVE_MANAGER _moveManager;
 	class GIMBAL_STABILITY_MANAGER _gimbalStabilityManager;
 	class COLLISION_ALERT_MANAGER _collisionAlertManager;
-
-	WHEELCHAIR();
-	~WHEELCHAIR();
 };
 #endif

@@ -33,6 +33,7 @@
     <ClInclude Include=".\template\Singleton.hpp" />
     <ClInclude Include=".\Wheelchair.h" />
     <ClInclude Include=".\Wheelchair_Core.h" />
+    <ClInclude Include="Wheelchair_Pin.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

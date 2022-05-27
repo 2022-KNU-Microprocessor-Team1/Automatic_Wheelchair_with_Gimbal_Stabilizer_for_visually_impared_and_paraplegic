@@ -15,10 +15,6 @@
 #define BITS_PER_SECONDS 9600 //시리얼 통신 위한 초당 비트 단위 전송 속도
 
 #define DEBUG_MODE
-#ifndef DEBUG_MODE
-#define VAR_DUMP(var) //do nothing
-#define ERROR_LOG(msg) //do nothing
-#endif
 
 #include <Arduino.h> // https://www.circuitstoday.com/arduino-mega-pinout-schematics
 #include <IRremote.h> // https://arduino-irremote.github.io/Arduino-IRremote/index.html
@@ -26,6 +22,7 @@
 #include <ShiftRegisterPWM.h> // https://timodenk.com/blog/shiftregister-pwm-library/
 #include <Servo.h>
 
+#include "./Wheelchair_Pin.h"
 #include "./template/Singleton.hpp"
 #include "./common/CommonShiftRegPwm.h"
 
