@@ -1,18 +1,18 @@
-#ifndef _SINGLETON_HPP_
+﻿#ifndef _SINGLETON_HPP_
 #define _SINGLETON_HPP_
 
 /// <summary>
-/// �ν��Ͻ� Ÿ�Կ� ���� �̱���
+/// 인스턴스 타입에 따른 싱글톤
 /// </summary>
-/// <typeparam name="INSTANCE_TYPE">�ν��Ͻ� Ÿ��</typeparam>
+/// <typeparam name="INSTANCE_TYPE">인스턴스 타입</typeparam>
 template <typename INSTANCE_TYPE>
 class SINGLETON
 {
 public:
 	/// <summary>
-	/// �ڽ��� ���� �ν��Ͻ� ���� ��ȯ
+	/// 자신의 고유 인스턴스 참조 반환
 	/// </summary>
-	/// <returns>�ڽ��� ���� �ν��Ͻ� ����</returns>
+	/// <returns>자신의 고유 인스턴스 참조</returns>
 	static INSTANCE_TYPE& GetInstance()
 	{
 		if (_instance == NULL)
@@ -22,7 +22,7 @@ public:
 	}
 
 	/// <summary>
-	/// �ڽ��� ���� �ν��Ͻ� �޸� �Ҵ� ����
+	/// 자신의 고유 인스턴스 메모리 할당 해제
 	/// </summary>
 	static void Dispose()
 	{
@@ -31,7 +31,7 @@ public:
 	}
 
 protected:
-	static INSTANCE_TYPE* _instance; //���� �ν��Ͻ�
+	static INSTANCE_TYPE* _instance; //고유 인스턴스
 };
 
 template<typename INSTANCE_TYPE>

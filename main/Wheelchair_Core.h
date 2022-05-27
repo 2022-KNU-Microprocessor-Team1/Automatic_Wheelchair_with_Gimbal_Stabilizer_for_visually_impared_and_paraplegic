@@ -1,18 +1,18 @@
-#ifndef _WHEELCHAIR_CORE_H_
+ï»¿#ifndef _WHEELCHAIR_CORE_H_
 #define _WHEELCHAIR_CORE_H_
 
-#define _VAR_DUMP(name, value) Serial.println(String(name) + " : " +  String(value)); //½Ã¸®¾ó Åë½Å¿¡ "name : value" Ãâ·Â
+#define _VAR_DUMP(name, value) Serial.println(String(name) + " : " +  String(value)); //ì‹œë¦¬ì–¼ í†µì‹ ì— "name : value" ì¶œë ¥
 #define VAR_DUMP(var) _VAR_DUMP(#var, (var))
-#define ERROR_LOG(msg) _VAR_DUMP("Error", msg) //¿À·ù ·Î±× Ãâ·Â
+#define ERROR_LOG(msg) _VAR_DUMP("Error", msg) //ì˜¤ë¥˜ ë¡œê·¸ ì¶œë ¥
 
 #define LENGTH(array) ((sizeof(array)) / (sizeof(array[0])))
 
-#define ARDUINO_RESOLUTION_IN_BITS 10 //¾ÆµÎÀÌ³ëÀÇ ºñÆ® ´ÜÀ§ ÇØ»óµµ
-#define MIN_ADC_VALUE 0 //ÃÖ¼Ò ¾Æ³¯·Î±×-µğÁöÅĞ ½ÅÈ£ º¯È¯ (ADC) °ª
-#define MAX_ADC_VALUE (((1) << ARDUINO_RESOLUTION_IN_BITS) - 1) //ÃÖ´ë ¾Æ³¯·Î±×-µğÁöÅĞ ½ÅÈ£ º¯È¯ (ADC) °ª
-#define MIN_PWM_VALUE 0 //ÃÖ¼Ò ÆŞ½º Æø º¯Á¶ (PWM) °ª
-#define MAX_PWM_VALUE 255 //ÃÖ´ë ÆŞ½º Æø º¯Á¶ (PWM) °ª
-#define BITS_PER_SECONDS 9600 //½Ã¸®¾ó Åë½Å À§ÇÑ ÃÊ´ç ºñÆ® ´ÜÀ§ Àü¼Û ¼Óµµ
+#define ARDUINO_RESOLUTION_IN_BITS 10 //ì•„ë‘ì´ë…¸ì˜ ë¹„íŠ¸ ë‹¨ìœ„ í•´ìƒë„
+#define MIN_ADC_VALUE 0 //ìµœì†Œ ì•„ë‚ ë¡œê·¸-ë””ì§€í„¸ ì‹ í˜¸ ë³€í™˜ (ADC) ê°’
+#define MAX_ADC_VALUE (((1) << ARDUINO_RESOLUTION_IN_BITS) - 1) //ìµœëŒ€ ì•„ë‚ ë¡œê·¸-ë””ì§€í„¸ ì‹ í˜¸ ë³€í™˜ (ADC) ê°’
+#define MIN_PWM_VALUE 0 //ìµœì†Œ í„ìŠ¤ í­ ë³€ì¡° (PWM) ê°’
+#define MAX_PWM_VALUE 255 //ìµœëŒ€ í„ìŠ¤ í­ ë³€ì¡° (PWM) ê°’
+#define BITS_PER_SECONDS 9600 //ì‹œë¦¬ì–¼ í†µì‹  ìœ„í•œ ì´ˆë‹¹ ë¹„íŠ¸ ë‹¨ìœ„ ì „ì†¡ ì†ë„
 
 #define DEBUG_MODE
 #ifndef DEBUG_MODE

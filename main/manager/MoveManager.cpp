@@ -1,7 +1,7 @@
-#include "../Wheelchair_Core.h"
+ï»¿#include "../Wheelchair_Core.h"
 
 /// <summary>
-/// MOVE_MANAGER »ý¼ºÀÚ
+/// MOVE_MANAGER ìƒì„±ìž
 /// </summary>
 MOVE_MANAGER::MOVE_MANAGER()
 {
@@ -10,31 +10,31 @@ MOVE_MANAGER::MOVE_MANAGER()
 	pinMode(wheel_pin::H_BRIDGE_RIGHT_INPUT1, INPUT);
 	pinMode(wheel_pin::H_BRIDGE_RIGHT_INPUT2, INPUT);
 
-	//TODO : Àû¿Ü¼± Åë½Å ÇÉ Å×½ºÆ® ÈÄ ÃÊ±âÈ­ ¼öÇà
+	//TODO : ì ì™¸ì„  í†µì‹  í•€ í…ŒìŠ¤íŠ¸ í›„ ì´ˆê¸°í™” ìˆ˜í–‰
 }
 
 /// <summary>
-/// MOVE_MANAGER ¼Ò¸êÀÚ
+/// MOVE_MANAGER ì†Œë©¸ìž
 /// </summary>
 MOVE_MANAGER::~MOVE_MANAGER()
 {
 }
 
 /// <summary>
-/// ÀÌµ¿ ¹æÇâ¿¡ µû¶ó ÈÙÃ¼¾î ÀÌµ¿
+/// ì´ë™ ë°©í–¥ì— ë”°ë¼ íœ ì²´ì–´ ì´ë™
 /// </summary>
-/// <param name="moveDirection">ÀÌµ¿ ¹æÇâ</param>
+/// <param name="moveDirection">ì´ë™ ë°©í–¥</param>
 void MOVE_MANAGER::MoveTo(MOVE_DIRECTION moveDirection) const
 {
-	//½ºÀ§Ä¡ÀÇ »óÅÂ º¯°æ Àü ºñÈ°¼ºÈ­ (´Ü¶ô ¹æÁö)
+	//ìŠ¤ìœ„ì¹˜ì˜ ìƒíƒœ ë³€ê²½ ì „ ë¹„í™œì„±í™” (ë‹¨ë½ ë°©ì§€)
 	this->GetInstance().SetPwmData(shift_reg_pin::inner_wheel_pin::H_BRIDGE_LEFT_EN_OUTPUT, LOW);
 	this->GetInstance().SetPwmData(shift_reg_pin::inner_wheel_pin::H_BRIDGE_RIGHT_EN_OUTPUT, LOW);
 	this->GetInstance().WriteShiftReg();
 
-	int leftWheelRotateSpeed = 0; //¿ÞÂÊ ¹ÙÄû È¸Àü ¼Óµµ
-	int rightWheelRotateSpeed = 0; //¿À¸¥ÂÊ ¹ÙÄû È¸Àü ¼Óµµ
+	int leftWheelRotateSpeed = 0; //ì™¼ìª½ ë°”í€´ íšŒì „ ì†ë„
+	int rightWheelRotateSpeed = 0; //ì˜¤ë¥¸ìª½ ë°”í€´ íšŒì „ ì†ë„
 
-	switch (moveDirection) //ÀÌµ¿ ¹æÇâ¿¡ µû¶ó °¢ ¹ÙÄûÀÇ ÀÌµ¿ ¼Óµµ ÇÒ´ç
+	switch (moveDirection) //ì´ë™ ë°©í–¥ì— ë”°ë¼ ê° ë°”í€´ì˜ ì´ë™ ì†ë„ í• ë‹¹
 	{
 	case MOVE_DIRECTION::FORWARD:
 	case MOVE_DIRECTION::BACKWARD:
@@ -63,14 +63,14 @@ void MOVE_MANAGER::MoveTo(MOVE_DIRECTION moveDirection) const
 		break;
 	}
 
-	switch (moveDirection) //ÀÌµ¿ ¹æÇâ¿¡ µû¶ó H-ºê¸´Áö Ãâ·Â ¹æÇâ ¼³Á¤
+	switch (moveDirection) //ì´ë™ ë°©í–¥ì— ë”°ë¼ H-ë¸Œë¦¿ì§€ ì¶œë ¥ ë°©í–¥ ì„¤ì •
 	{
 	case MOVE_DIRECTION::FORWARD:
 	case MOVE_DIRECTION::LEFT:
 	case MOVE_DIRECTION::RIGHT:
 	case MOVE_DIRECTION::LEFT_AND_FORWARD:
 	case MOVE_DIRECTION::RIGHT_AND_FORWARD:
-		//ÀüÁø À§ÇÑ Ãâ·Â 1 È°¼ºÈ­, Ãâ·Â 2 ºñÈ°¼ºÈ­
+		//ì „ì§„ ìœ„í•œ ì¶œë ¥ 1 í™œì„±í™”, ì¶œë ¥ 2 ë¹„í™œì„±í™”
 		digitalWrite(wheel_pin::H_BRIDGE_LEFT_INPUT1, HIGH);
 		digitalWrite(wheel_pin::H_BRIDGE_LEFT_INPUT2, LOW);
 		digitalWrite(wheel_pin::H_BRIDGE_RIGHT_INPUT1, HIGH);
@@ -78,7 +78,7 @@ void MOVE_MANAGER::MoveTo(MOVE_DIRECTION moveDirection) const
 		break;
 
 	case MOVE_DIRECTION::BACKWARD:
-		//ÈÄÁø À§ÇÑ Ãâ·Â 1 ºñÈ°¼ºÈ­, Ãâ·Â 2 È°¼ºÈ­
+		//í›„ì§„ ìœ„í•œ ì¶œë ¥ 1 ë¹„í™œì„±í™”, ì¶œë ¥ 2 í™œì„±í™”
 		digitalWrite(wheel_pin::H_BRIDGE_LEFT_INPUT1, LOW);
 		digitalWrite(wheel_pin::H_BRIDGE_LEFT_INPUT2, HIGH);
 		digitalWrite(wheel_pin::H_BRIDGE_RIGHT_INPUT1, LOW);
@@ -89,7 +89,7 @@ void MOVE_MANAGER::MoveTo(MOVE_DIRECTION moveDirection) const
 		break;
 	}
 
-	//°¢ ¹ÙÄûÀÇ È¸Àü ¼Óµµ¿¡ µû¶ó Á¦¾î
+	//ê° ë°”í€´ì˜ íšŒì „ ì†ë„ì— ë”°ë¼ ì œì–´
 	this->GetInstance().SetPwmData(shift_reg_pin::inner_wheel_pin::H_BRIDGE_LEFT_EN_OUTPUT, leftWheelRotateSpeed);
 	this->GetInstance().SetPwmData(shift_reg_pin::inner_wheel_pin::H_BRIDGE_RIGHT_EN_OUTPUT, rightWheelRotateSpeed);
 	this->GetInstance().WriteShiftReg();

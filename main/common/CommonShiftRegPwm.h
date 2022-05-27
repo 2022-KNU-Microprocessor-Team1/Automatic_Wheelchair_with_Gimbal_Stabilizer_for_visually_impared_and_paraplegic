@@ -1,52 +1,52 @@
-#ifndef _COMMON_SHIFT_REG_PWM_H_
+ï»¿#ifndef _COMMON_SHIFT_REG_PWM_H_
 #define _COMMON_SHIFT_REG_PWM_H_
 
-#define NUM_OF_SHIFT_REG 1 //½¬ÇÁÆ® ·¹Áö½ºÅÍ °³¼ö
-#define SHIFT_REG_PWM_RESOLUTION (MAX_PWM_VALUE) //½¬ÇÁÆ® ·¹Áö½ºÅÍ PWM Ãâ·Â À§ÇÑ ÇØ»óµµ (1 ~ 255)
+#define NUM_OF_SHIFT_REG 1 //ì‰¬í”„íŠ¸ ë ˆì§€ìŠ¤í„° ê°œìˆ˜
+#define SHIFT_REG_PWM_RESOLUTION (MAX_PWM_VALUE) //ì‰¬í”„íŠ¸ ë ˆì§€ìŠ¤í„° PWM ì¶œë ¥ ìœ„í•œ í•´ìƒë„ (1 ~ 255)
 
 /// <summary>
-/// ÀÌµ¿ ·¹Áö½ºÅÍ ÇÉ Á¤ÀÇ
+/// ì´ë™ ë ˆì§€ìŠ¤í„° í•€ ì •ì˜
 /// </summary>
 namespace shift_reg_pin
 {
 	/***
-		ShiftRegister-PWM-Library´Â ±âº»°ªÀ¸·Î µ¥ÀÌÅÍ, LATCH, Å¬·Ï¿¡ ´ëÇØ
-		¼øÂ÷ÀûÀ¸·Î 2, 4, 3¹ø ÇÉ »ç¿ë
+		ShiftRegister-PWM-LibraryëŠ” ê¸°ë³¸ê°’ìœ¼ë¡œ ë°ì´í„°, LATCH, í´ë¡ì— ëŒ€í•´
+		ìˆœì°¨ì ìœ¼ë¡œ 2, 4, 3ë²ˆ í•€ ì‚¬ìš©
 	***/
 
-	const int HC595_DATA_OUTPUT = 2; //½¬ÇÁÆ® ·¹Áö½ºÅÍ µ¥ÀÌÅÍ ÇÉ
-	const int HC595_RCLK_OUTPUT = 4; //½¬ÇÁÆ® ·¹Áö½ºÅÍ Ãâ·Â ·¹Áö½ºÅÍ Å¬·Ï (LATCH)
-	const int HC595_SRCLK_OUTPUT = 3; //½¬ÇÁÆ® ·¹Áö½ºÅÍ Å¬·Ï
+	const int HC595_DATA_OUTPUT = 2; //ì‰¬í”„íŠ¸ ë ˆì§€ìŠ¤í„° ë°ì´í„° í•€
+	const int HC595_RCLK_OUTPUT = 4; //ì‰¬í”„íŠ¸ ë ˆì§€ìŠ¤í„° ì¶œë ¥ ë ˆì§€ìŠ¤í„° í´ë¡ (LATCH)
+	const int HC595_SRCLK_OUTPUT = 3; //ì‰¬í”„íŠ¸ ë ˆì§€ìŠ¤í„° í´ë¡
 
 	/***
-		ShiftRegister-PWM-LibraryÀÇ Ãâ·Â ÇÉÀÌ ¿ª¼øÀ¸·Î ÇÒ´çµÇ¾î ÀÖÀ¸¹Ç·Î,
-		0¹ø Ãâ·Â ÇÉ ¿¬°á => 7¹ø Ãâ·Â ÇÉ ÇÒ´çÀ¸·Î ¿ª¼øÀ¸·Î ÇÒ´ç ÇÒ °Í
+		ShiftRegister-PWM-Libraryì˜ ì¶œë ¥ í•€ì´ ì—­ìˆœìœ¼ë¡œ í• ë‹¹ë˜ì–´ ìžˆìœ¼ë¯€ë¡œ,
+		0ë²ˆ ì¶œë ¥ í•€ ì—°ê²° => 7ë²ˆ ì¶œë ¥ í•€ í• ë‹¹ìœ¼ë¡œ ì—­ìˆœìœ¼ë¡œ í• ë‹¹ í•  ê²ƒ
 	***/
 
 	/// <summary>
-	/// ½¬ÇÁÆ® ·¹Áö½ºÅÍÀÇ Ãâ·Â¿¡ ´ëÇÑ Ãæµ¹ °¨Áö ¾Ë¸² ÇÉ Á¤ÀÇ
+	/// ì‰¬í”„íŠ¸ ë ˆì§€ìŠ¤í„°ì˜ ì¶œë ¥ì— ëŒ€í•œ ì¶©ëŒ ê°ì§€ ì•Œë¦¼ í•€ ì •ì˜
 	/// </summary>
 	namespace inner_collison_alert_pin
 	{
-		const char HCSR04_BACKWARD_TRIG_OUTPUT = 7; //ÈÄ¹æ Àå¾Ö¹° °¨Áö ÃÊÀ½ÆÄ ¼¾¼­ Æ®¸®°Å ÇÉ (PWM)
-		const char HCSR04_FORWARD_TRIG_OUTPUT = 6; //Àü¹æ Àå¾Ö¹° °¨Áö ÃÊÀ½ÆÄ ¼¾¼­ Æ®¸®°Å ÇÉ (PWM)
+		const char HCSR04_BACKWARD_TRIG_OUTPUT = 7; //í›„ë°© ìž¥ì• ë¬¼ ê°ì§€ ì´ˆìŒíŒŒ ì„¼ì„œ íŠ¸ë¦¬ê±° í•€ (PWM)
+		const char HCSR04_FORWARD_TRIG_OUTPUT = 6; //ì „ë°© ìž¥ì• ë¬¼ ê°ì§€ ì´ˆìŒíŒŒ ì„¼ì„œ íŠ¸ë¦¬ê±° í•€ (PWM)
 
-		const char PIEZO_OUTPUT = 3; //Ãæµ¹ °æ°í ÇÇ¿¡Á¶ ºÎÀú (PWM)
-		const char LED_OUTPUT = 2; //Ãæµ¹ °æ°í LED (PWM)
+		const char PIEZO_OUTPUT = 3; //ì¶©ëŒ ê²½ê³  í”¼ì—ì¡° ë¶€ì € (PWM)
+		const char LED_OUTPUT = 2; //ì¶©ëŒ ê²½ê³  LED (PWM)
 	};
 
 	/// <summary>
-	/// ½¬ÇÁÆ® ·¹Áö½ºÅÍÀÇ Ãâ·Â¿¡ ´ëÇÑ ¹ÙÄû ÇÉ Á¤ÀÇ
+	/// ì‰¬í”„íŠ¸ ë ˆì§€ìŠ¤í„°ì˜ ì¶œë ¥ì— ëŒ€í•œ ë°”í€´ í•€ ì •ì˜
 	/// </summary>
 	namespace inner_wheel_pin
 	{
-		const char H_BRIDGE_RIGHT_EN_OUTPUT = 5; //H-ºê¸´Áö ¿À¸¥ÂÊ ¹ÙÄû ¼Óµµ Á¶ÀýÀ» À§ÇÑ 1,2 È°¼ºÈ­ ÇÉ (PWM)
-		const char H_BRIDGE_LEFT_EN_OUTPUT = 4; //H-ºê¸´Áö ¿ÞÂÊ ¹ÙÄû ¼Óµµ Á¶ÀýÀ» À§ÇÑ 3,4 È°¼ºÈ­ ÇÉ (PWM)
+		const char H_BRIDGE_RIGHT_EN_OUTPUT = 5; //H-ë¸Œë¦¿ì§€ ì˜¤ë¥¸ìª½ ë°”í€´ ì†ë„ ì¡°ì ˆì„ ìœ„í•œ 1,2 í™œì„±í™” í•€ (PWM)
+		const char H_BRIDGE_LEFT_EN_OUTPUT = 4; //H-ë¸Œë¦¿ì§€ ì™¼ìª½ ë°”í€´ ì†ë„ ì¡°ì ˆì„ ìœ„í•œ 3,4 í™œì„±í™” í•€ (PWM)
 	}
 };
 
 /// <summary>
-/// °øÅë ½¬ÇÁÆ® ·¹Áö½ºÅÍ PWM Ãâ·Â
+/// ê³µí†µ ì‰¬í”„íŠ¸ ë ˆì§€ìŠ¤í„° PWM ì¶œë ¥
 /// </summary>
 class COMMON_SHIFT_REG_PWM : public SINGLETON<COMMON_SHIFT_REG_PWM>
 {
@@ -56,11 +56,11 @@ public:
 	void WriteShiftReg() const;
 
 private:
-	unsigned char _pwmData[8]; //½¬ÇÁÆ® ·¹Áö½ºÅÍ Ãâ·Â ÇÉ¿¡ Ãâ·Â µÉ PWM µ¥ÀÌÅÍ (index : shift_reg_pin¿¡ µû¸§)
+	unsigned char _pwmData[8]; //ì‰¬í”„íŠ¸ ë ˆì§€ìŠ¤í„° ì¶œë ¥ í•€ì— ì¶œë ¥ ë  PWM ë°ì´í„° (index : shift_reg_pinì— ë”°ë¦„)
 	class ShiftRegisterPWM _shiftRegPwm;
 
 private:
-	//»ó¼Ó ½Ã SINGLETON¿¡¼­ »ý¼ºÀÚ, ¼Ò¸êÀÚ Á¢±Ù
+	//ìƒì† ì‹œ SINGLETONì—ì„œ ìƒì„±ìž, ì†Œë©¸ìž ì ‘ê·¼
 	friend class SINGLETON;
 
 	COMMON_SHIFT_REG_PWM();

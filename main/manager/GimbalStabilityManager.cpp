@@ -1,15 +1,15 @@
-#include "../Wheelchair_Core.h"
+ï»¿#include "../Wheelchair_Core.h"
 
 /// <summary>
-/// GIMBAL_STABILITY_MANAGER »ý¼ºÀÚ
+/// GIMBAL_STABILITY_MANAGER ìƒì„±ìž
 /// </summary>
 GIMBAL_STABILITY_MANAGER::GIMBAL_STABILITY_MANAGER()
 {
-	//TODO : ±â¿ï±â ¼¾¼­ ÇÉ Å×½ºÆ® ÈÄ ÃÊ±âÈ­ ¼öÇà
+	//TODO : ê¸°ìš¸ê¸° ì„¼ì„œ í•€ í…ŒìŠ¤íŠ¸ í›„ ì´ˆê¸°í™” ìˆ˜í–‰
 }
 
 /// <summary>
-/// GIMBAL_STABILITY_MANAGER ¼Ò¸êÀÚ
+/// GIMBAL_STABILITY_MANAGER ì†Œë©¸ìž
 /// </summary>
 GIMBAL_STABILITY_MANAGER::~GIMBAL_STABILITY_MANAGER()
 {

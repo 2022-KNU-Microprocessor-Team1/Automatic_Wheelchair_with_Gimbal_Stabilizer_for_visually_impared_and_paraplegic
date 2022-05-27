@@ -1,31 +1,31 @@
-#ifndef _COLLISION_ALERT_MANAGER_H_
+ï»¿#ifndef _COLLISION_ALERT_MANAGER_H_
 #define _COLLISION_ALERT_MANAGER_H_
 
-#define MIN_HCSR04_CM_RANGE 2 //ÃÊÀ½ÆÄ °Å¸® ¼¾¼­ ÃÖ¼Ò ÃøÁ¤ °¡´É ¹üÀ§ (cm ´ÜÀ§)
-#define MAX_HCSR04_CM_RANGE 400 //ÃÊÀ½ÆÄ °Å¸® ¼¾¼­ ÃÖ´ë ÃøÁ¤ °¡´É ¹üÀ§ (cm ´ÜÀ§)
+#define MIN_HCSR04_CM_RANGE 2 //ì´ˆìŒíŒŒ ê±°ë¦¬ ì„¼ì„œ ìµœì†Œ ì¸¡ì • ê°€ëŠ¥ ë²”ìœ„ (cm ë‹¨ìœ„)
+#define MAX_HCSR04_CM_RANGE 400 //ì´ˆìŒíŒŒ ê±°ë¦¬ ì„¼ì„œ ìµœëŒ€ ì¸¡ì • ê°€ëŠ¥ ë²”ìœ„ (cm ë‹¨ìœ„)
 
 /// <summary>
-/// Ãæµ¹ °æ°í À§ÇÑ ÇÉ Á¤ÀÇ
+/// ì¶©ëŒ ê²½ê³  ìœ„í•œ í•€ ì •ì˜
 /// </summary>
 namespace collision_alert_pin
 {
-	const int HCSR04_BACKWARD_ECHO_INPUT = 13; //ÈÄ¹æ Àå¾Ö¹° °¨Áö ÃÊÀ½ÆÄ ¼¾¼­ ¿¡ÄÚ ÇÉ
-	const int HCSR04_FORWARD_ECHO_INPUT = 12; //Àü¹æ Àå¾Ö¹° °¨Áö ÃÊÀ½ÆÄ ¼¾¼­ ¿¡ÄÚ ÇÉ
+	const int HCSR04_BACKWARD_ECHO_INPUT = 13; //í›„ë°© ìž¥ì• ë¬¼ ê°ì§€ ì´ˆìŒíŒŒ ì„¼ì„œ ì—ì½” í•€
+	const int HCSR04_FORWARD_ECHO_INPUT = 12; //ì „ë°© ìž¥ì• ë¬¼ ê°ì§€ ì´ˆìŒíŒŒ ì„¼ì„œ ì—ì½” í•€
 
-	const int Gl5537_ANALOG_INPUT = 0; //Á¶µµ ¼¾¼­ (ANALOG)
+	const int Gl5537_ANALOG_INPUT = 0; //ì¡°ë„ ì„¼ì„œ (ANALOG)
 };
 
 /// <summary>
-/// Àå¾Ö¹°°úÀÇ cm ´ÜÀ§ °Å¸®
+/// ìž¥ì• ë¬¼ê³¼ì˜ cm ë‹¨ìœ„ ê±°ë¦¬
 /// </summary>
 struct DISTANCE_CM
 {
-	unsigned long _backwardCm; //ÈÄ¹æ Àå¾Ö¹°°úÀÇ cm ´ÜÀ§ °Å¸®
-	unsigned long _forwardCm; //Àü¹æ Àå¾Ö¹°°úÀÇ cm ´ÜÀ§ °Å¸®
+	unsigned long _backwardCm; //í›„ë°© ìž¥ì• ë¬¼ê³¼ì˜ cm ë‹¨ìœ„ ê±°ë¦¬
+	unsigned long _forwardCm; //ì „ë°© ìž¥ì• ë¬¼ê³¼ì˜ cm ë‹¨ìœ„ ê±°ë¦¬
 };
 
 /// <summary>
-/// Ãæµ¹ °æ°í °ü¸®ÀÚ
+/// ì¶©ëŒ ê²½ê³  ê´€ë¦¬ìž
 /// </summary>
 class COLLISION_ALERT_MANAGER : public SINGLETON<COMMON_SHIFT_REG_PWM>
 {
@@ -33,16 +33,16 @@ public:
 	void RunTask() const;
 
 public:
-	int MIN_GL5537_THRESHOLD = 60; //ÃÖ¼Ò Á¶µµ ¼¾¼­ ÃøÁ¤ ÀÓ°è °ª
-	int MAX_GL5537_THRESHOLD = 970; //ÃÖ´ë Á¶µµ ¼¾¼­ ÃøÁ¤ ÀÓ°è °ª
-	int COLLISION_ALERT_CM_THRESHOLD = (MIN_HCSR04_CM_RANGE + 20); //Ãæµ¹ °æ°í ÀÓ°è °ª (cm ´ÜÀ§)
+	int MIN_GL5537_THRESHOLD = 60; //ìµœì†Œ ì¡°ë„ ì„¼ì„œ ì¸¡ì • ìž„ê³„ ê°’
+	int MAX_GL5537_THRESHOLD = 970; //ìµœëŒ€ ì¡°ë„ ì„¼ì„œ ì¸¡ì • ìž„ê³„ ê°’
+	int COLLISION_ALERT_CM_THRESHOLD = (MIN_HCSR04_CM_RANGE + 20); //ì¶©ëŒ ê²½ê³  ìž„ê³„ ê°’ (cm ë‹¨ìœ„)
 
 private:
 	unsigned char GetBrightnessFromGl5537() const;
 	DISTANCE_CM GetDistanceCmFromHcsr04() const;
 
 private:
-	//»ó¼Ó ½Ã SINGLETON¿¡¼­ »ý¼ºÀÚ, ¼Ò¸êÀÚ Á¢±Ù
+	//ìƒì† ì‹œ SINGLETONì—ì„œ ìƒì„±ìž, ì†Œë©¸ìž ì ‘ê·¼
 	friend class SINGLETON;
 
 	COLLISION_ALERT_MANAGER();

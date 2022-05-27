@@ -35,6 +35,7 @@
     <ClInclude Include=".\Wheelchair_Core.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".editorconfig" />
     <None Include="main.ino" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

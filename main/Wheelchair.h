@@ -1,8 +1,8 @@
-#ifndef _WHEELCHAIR_H_
+ï»¿#ifndef _WHEELCHAIR_H_
 #define _WHEELCHAIR_H_
 
 /// <summary>
-/// ÈÙÃ¼¾î Á¦¾î
+/// íœ ì²´ì–´ ì œì–´
 /// </summary>
 class WHEELCHAIR
 {

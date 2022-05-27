@@ -58,5 +58,8 @@
     <None Include="main.ino">
       <Filter>소스 파일</Filter>
     </None>
+    <None Include=".editorconfig">
+      <Filter>리소스 파일</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -1,16 +1,16 @@
-#include "../Wheelchair_Core.h"
+ï»¿#include "../Wheelchair_Core.h"
 
 /// <summary>
-/// COMMON_SHIFT_REG_PWM »ý¼ºÀÚ
+/// COMMON_SHIFT_REG_PWM ìƒì„±ìž
 /// </summary>
 COMMON_SHIFT_REG_PWM::COMMON_SHIFT_REG_PWM()
 {
-	//½¬ÇÁÆ® ·¹Áö½ºÅÍ ÇÉ ÃÊ±âÈ­
+	//ì‰¬í”„íŠ¸ ë ˆì§€ìŠ¤í„° í•€ ì´ˆê¸°í™”
 	pinMode(shift_reg_pin::HC595_DATA_OUTPUT, OUTPUT);
 	pinMode(shift_reg_pin::HC595_RCLK_OUTPUT, OUTPUT);
 	pinMode(shift_reg_pin::HC595_SRCLK_OUTPUT, OUTPUT);
 
-	//½¬ÇÁÆ® ·¹Áö½ºÅÍ ³»ºÎ Ãâ·Â ÇÉ ÃÊ±âÈ­
+	//ì‰¬í”„íŠ¸ ë ˆì§€ìŠ¤í„° ë‚´ë¶€ ì¶œë ¥ í•€ ì´ˆê¸°í™”
 	pinMode(shift_reg_pin::inner_collison_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, OUTPUT);
 	pinMode(shift_reg_pin::inner_collison_alert_pin::HCSR04_FORWARD_TRIG_OUTPUT, OUTPUT);
 	pinMode(shift_reg_pin::inner_collison_alert_pin::PIEZO_OUTPUT, OUTPUT);
@@ -19,20 +19,20 @@ COMMON_SHIFT_REG_PWM::COMMON_SHIFT_REG_PWM()
 	pinMode(shift_reg_pin::inner_wheel_pin::H_BRIDGE_LEFT_EN_OUTPUT, OUTPUT);
 
 	this->_shiftRegPwm = ShiftRegisterPWM(NUM_OF_SHIFT_REG, SHIFT_REG_PWM_RESOLUTION);
-	//½¬ÇÁÆ® ·¹Áö½ºÅÍ·Î PWM Ãâ·Â À§ÇØ ÇÏµå¿þ¾î Å¸ÀÌ¸Ó 1 »ç¿ë
+	//ì‰¬í”„íŠ¸ ë ˆì§€ìŠ¤í„°ë¡œ PWM ì¶œë ¥ ìœ„í•´ í•˜ë“œì›¨ì–´ íƒ€ì´ë¨¸ 1 ì‚¬ìš©
 	this->_shiftRegPwm.interrupt(ShiftRegisterPWM::UpdateFrequency::SuperFast);
 	this->ClearPwmData();
 }
 
 /// <summary>
-/// COMMON_SHIFT_REG_PWM ¼Ò¸êÀÚ
+/// COMMON_SHIFT_REG_PWM ì†Œë©¸ìž
 /// </summary>
 COMMON_SHIFT_REG_PWM::~COMMON_SHIFT_REG_PWM()
 {
 }
 
 /// <summary>
-/// ½¬ÇÁÆ® ·¹Áö½ºÅÍ Ãâ·Â ÇÉ¿¡ Ãâ·Â µÉ PWM µ¥ÀÌÅÍ ÃÊ±âÈ­
+/// ì‰¬í”„íŠ¸ ë ˆì§€ìŠ¤í„° ì¶œë ¥ í•€ì— ì¶œë ¥ ë  PWM ë°ì´í„° ì´ˆê¸°í™”
 /// </summary>
 void COMMON_SHIFT_REG_PWM::ClearPwmData()
 {
@@ -40,10 +40,10 @@ void COMMON_SHIFT_REG_PWM::ClearPwmData()
 }
 
 /// <summary>
-/// ÀÌµ¿ ·¹Áö½ºÅÍÀÇ ³»ºÎ ÇÉ ¹øÈ£¿¡ Ãâ·Â µÉ PWM µ¥ÀÌÅÍ ÇÒ´ç
+/// ì´ë™ ë ˆì§€ìŠ¤í„°ì˜ ë‚´ë¶€ í•€ ë²ˆí˜¸ì— ì¶œë ¥ ë  PWM ë°ì´í„° í• ë‹¹
 /// </summary>
-/// <param name="index">ÀÌµ¿ ·¹Áö½ºÅÍÀÇ ³»ºÎ ÇÉ ¹øÈ£</param>
-/// <param name="pwmData">Ãâ·Â µÉ PWM µ¥ÀÌÅÍ</param>
+/// <param name="index">ì´ë™ ë ˆì§€ìŠ¤í„°ì˜ ë‚´ë¶€ í•€ ë²ˆí˜¸</param>
+/// <param name="pwmData">ì¶œë ¥ ë  PWM ë°ì´í„°</param>
 void COMMON_SHIFT_REG_PWM::SetPwmData(char index, unsigned char pwmData)
 {
 	if (index < 0 || index >= 8)
@@ -56,7 +56,7 @@ void COMMON_SHIFT_REG_PWM::SetPwmData(char index, unsigned char pwmData)
 }
 
 /// <summary>
-/// ÀüÃ¼ ÀÌµ¿ ·¹Áö½ºÅÍÀÇ ³»ºÎ ÇÉ ¹øÈ£¿¡ PWM µ¥ÀÌÅÍ Ãâ·Â
+/// ì „ì²´ ì´ë™ ë ˆì§€ìŠ¤í„°ì˜ ë‚´ë¶€ í•€ ë²ˆí˜¸ì— PWM ë°ì´í„° ì¶œë ¥
 /// </summary>
 void COMMON_SHIFT_REG_PWM::WriteShiftReg() const
 {
