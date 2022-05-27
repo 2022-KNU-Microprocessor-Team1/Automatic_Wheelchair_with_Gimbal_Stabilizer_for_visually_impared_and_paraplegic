@@ -16,7 +16,7 @@ struct DISTANCE_CM
 /// <summary>
 /// 충돌 경고 관리자
 /// </summary>
-class COLLISION_ALERT_MANAGER : public SINGLETON<COMMON_SHIFT_REG_PWM>
+class COLLISION_ALERT_MANAGER
 {
 public:
 	void RunTask() const;

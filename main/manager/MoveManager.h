@@ -20,7 +20,7 @@ enum class MOVE_DIRECTION : const int
 /// <summary>
 /// 이동 관리자
 /// </summary>
-class MOVE_MANAGER : public SINGLETON<COMMON_SHIFT_REG_PWM>
+class MOVE_MANAGER
 {
 public:
 	void MoveTo(MOVE_DIRECTION) const;

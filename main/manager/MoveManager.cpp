@@ -26,10 +26,12 @@ MOVE_MANAGER::~MOVE_MANAGER()
 /// <param name="moveDirection">이동 방향</param>
 void MOVE_MANAGER::MoveTo(MOVE_DIRECTION moveDirection) const
 {
+	COMMON_SHIFT_REG_PWM& commonShiftRegPwmInstance = COMMON_SHIFT_REG_PWM::GetInstance();
+
 	//스위치의 상태 변경 전 비활성화 (단락 방지)
-	this->GetInstance().SetPwmData(shift_reg_pin::inner_wheel_pin::H_BRIDGE_LEFT_EN_OUTPUT, LOW);
-	this->GetInstance().SetPwmData(shift_reg_pin::inner_wheel_pin::H_BRIDGE_RIGHT_EN_OUTPUT, LOW);
-	this->GetInstance().WriteShiftReg();
+	commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_wheel_pin::H_BRIDGE_LEFT_EN_OUTPUT, LOW);
+	commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_wheel_pin::H_BRIDGE_RIGHT_EN_OUTPUT, LOW);
+	commonShiftRegPwmInstance.WriteShiftReg();
 
 	int leftWheelRotateSpeed = 0; //왼쪽 바퀴 회전 속도
 	int rightWheelRotateSpeed = 0; //오른쪽 바퀴 회전 속도
@@ -90,7 +92,7 @@ void MOVE_MANAGER::MoveTo(MOVE_DIRECTION moveDirection) const
 	}
 
 	//각 바퀴의 회전 속도에 따라 제어
-	this->GetInstance().SetPwmData(shift_reg_pin::inner_wheel_pin::H_BRIDGE_LEFT_EN_OUTPUT, leftWheelRotateSpeed);
-	this->GetInstance().SetPwmData(shift_reg_pin::inner_wheel_pin::H_BRIDGE_RIGHT_EN_OUTPUT, rightWheelRotateSpeed);
-	this->GetInstance().WriteShiftReg();
+	commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_wheel_pin::H_BRIDGE_LEFT_EN_OUTPUT, leftWheelRotateSpeed);
+	commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_wheel_pin::H_BRIDGE_RIGHT_EN_OUTPUT, rightWheelRotateSpeed);
+	commonShiftRegPwmInstance.WriteShiftReg();
 }

@@ -4,7 +4,7 @@
 /// <summary>
 /// 수평 유지 관리자
 /// </summary>
-class GIMBAL_STABILITY_MANAGER : public SINGLETON<COMMON_SHIFT_REG_PWM>
+class GIMBAL_STABILITY_MANAGER
 {
 public:
 	void RunTask(); //TODO : x, y에 대해 읽어서 서보 모터 제어 (Servo.h 사용)

@@ -21,26 +21,28 @@ COLLISION_ALERT_MANAGER::~COLLISION_ALERT_MANAGER()
 /// </summary>
 void COLLISION_ALERT_MANAGER::RunTask() const
 {
+	COMMON_SHIFT_REG_PWM& commonShiftRegPwmInstance = COMMON_SHIFT_REG_PWM::GetInstance();
+
 	unsigned char brightness = this->GetBrightnessFromGl5537(); //주변 밝기
 	DISTANCE_CM distanceCm this->GetDistanceCmFromHcsr04(); //전방, 후방 장애물과의 cm단위 거리
 
 	if (distanceCm._backwardCm <= this->COLLISION_ALERT_CM_THRESHOLD ||
 		distanceCm._forwardCm <= this->COLLISION_ALERT_CM_THRESHOLD) //전방 혹은 후방 장애물과의 cm단위 거리가 임계 값 이하일 경우
 	{
-		this->GetInstance().SetPwmData(shift_reg_pin::inner_collison_alert_pin::LED_OUTPUT, 
+		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collison_alert_pin::LED_OUTPUT,
 			map(brightness, 
 				MIN_PWM_VALUE, MAX_PWM_VALUE,
 				MAX_PWM_VALUE, MIN_PWM_VALUE)); //주변이 밝을 경우 최소 밝기 출력, 어두울 경우 최대 밝기 출력
-		this->GetInstance().SetPwmData(shift_reg_pin::inner_collison_alert_pin::PIEZO_OUTPUT, MAX_PWM_VALUE);
+		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collison_alert_pin::PIEZO_OUTPUT, MAX_PWM_VALUE);
 	}
 	else //인접 한 장애물이 존재하지 않을 경우
 	{
-		this->GetInstance().SetPwmData(shift_reg_pin::inner_collison_alert_pin::LED_OUTPUT, MIN_PWM_VALUE);
-		this->GetInstance().SetPwmData(shift_reg_pin::inner_collison_alert_pin::PIEZO_OUTPUT, MIN_PWM_VALUE);
+		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collison_alert_pin::LED_OUTPUT, MIN_PWM_VALUE);
+		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collison_alert_pin::PIEZO_OUTPUT, MIN_PWM_VALUE);
 	}
 
-	this->GetInstance().WriteShiftReg();
-}
+	commonShiftRegPwmInstance.WriteShiftReg();
+}q
 
 /// <summary>
 /// GL5537 조도 센서 (CdS Photoresistor)의 측정 값으로부터 변환 된 펄스 폭 변조 (PWM) 값 범위 내의 밝기 반환
@@ -64,21 +66,23 @@ unsigned char COLLISION_ALERT_MANAGER::GetBrightnessFromGl5537() const
 /// <returns>물체와의 cm 단위 거리</returns>
 DISTANCE_CM COLLISION_ALERT_MANAGER::GetDistanceCmFromHcsr04() const
 {
+	COMMON_SHIFT_REG_PWM& commonShiftRegPwmInstance = COMMON_SHIFT_REG_PWM::GetInstance();
+
 	// https://randomnerdtutorials.com/complete-guide-for-ultrasonic-sensor-hc-sr04/
 	// https://www.arduino.cc/reference/ko/language/functions/advanced-io/pulsein/
 
 	//10마이크로초 이상 길이 (HIGH에 대한)의 펄스를 트리거 핀에 주어 작동 시작
-	this->GetInstance().SetPwmData(shift_reg_pin::inner_collison_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, LOW);
-	this->GetInstance().SetPwmData(shift_reg_pin::inner_collison_alert_pin::HCSR04_FORWARD_TRIG_OUTPUT, LOW);
-	this->GetInstance().WriteShiftReg();
+	commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collison_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, LOW);
+	commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collison_alert_pin::HCSR04_FORWARD_TRIG_OUTPUT, LOW);
+	commonShiftRegPwmInstance.WriteShiftReg();
 	delayMicroseconds(5);
-	this->GetInstance().SetPwmData(shift_reg_pin::inner_collison_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, HIGH);
-	this->GetInstance().SetPwmData(shift_reg_pin::inner_collison_alert_pin::HCSR04_FORWARD_TRIG_OUTPUT, HIGH);
-	this->GetInstance().WriteShiftReg();
+	commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collison_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, HIGH);
+	commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collison_alert_pin::HCSR04_FORWARD_TRIG_OUTPUT, HIGH);
+	commonShiftRegPwmInstance.WriteShiftReg();
 	delayMicroseconds(10);
-	this->GetInstance().SetPwmData(shift_reg_pin::inner_collison_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, LOW);
-	this->GetInstance().SetPwmData(shift_reg_pin::inner_collison_alert_pin::HCSR04_FORWARD_TRIG_OUTPUT, LOW);
-	this->GetInstance().WriteShiftReg();
+	commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collison_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, LOW);
+	commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collison_alert_pin::HCSR04_FORWARD_TRIG_OUTPUT, LOW);
+	commonShiftRegPwmInstance.WriteShiftReg();
 
 	DISTANCE_CM retVal = { 0, };
 
