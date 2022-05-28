@@ -37,7 +37,8 @@ protected:
 	/// SINGLTON 생성자
 	/// </summary>
 	SINGLETON()
-	{}
+	{
+	}
 
 private:
 	// https://docs.microsoft.com/ko-kr/cpp/cpp/copy-constructors-and-copy-assignment-operators-cpp?view=msvc-170

@@ -22,15 +22,11 @@
 
 #include <stdint.h>
 #include <Arduino.h> // https://www.circuitstoday.com/arduino-mega-pinout-schematics
-//#include <IRremote.h> // https://arduino-irremote.github.io/Arduino-IRremote/index.html
-#include <TimerThree.h> // https://www.pjrc.com/teensy/td_libs_TimerOne.html
-#include <ShiftRegisterPWM.h> // https://timodenk.com/blog/shiftregister-pwm-library/
-//#include <Servo.h> //TODO : 서보 타이머 충돌
 
-#include "./Wheelchair_Pin.h"
 #include "./template/Singleton.hpp"
-#include "./common/CommonShiftRegPwm.hpp"
+#include "./Wheelchair_Pin.h"
 
+#include "./module/CommonShiftRegPwm.hpp"
 #include "./module/BodyMove.hpp"
 #include "./module/GimbalStabilizer.hpp"
 #include "./module/CollisionAlert.hpp"

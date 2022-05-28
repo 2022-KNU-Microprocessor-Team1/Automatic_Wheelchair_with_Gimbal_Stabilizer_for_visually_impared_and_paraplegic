@@ -1,6 +1,10 @@
 #ifndef _BODY_MOVE_HPP_
 #define _BODY_MOVE_HPP_
 
+#include "../Wheelchair_Core.h"
+
+//#include "../extern_lib/IRremote/src/IRremote.h" // https://github.com/Arduino-IRremote/Arduino-IRremote
+
 #define MAX_WHEEL_ROTATE_SPEED (MAX_PWM_VALUE - 155) //최대 바퀴 회전 속도
 
 /// <summary>
@@ -48,7 +52,7 @@ public:
 	}
 
 	/// <summary>
-	/// 이동 방향에 따라 휠체어 이동
+	/// 이동 방향에 따라 차체 이동
 	/// </summary>
 	/// <param name="moveDirection">이동 방향</param>
 	void MoveTo(MOVE_DIRECTION moveDirection) const
@@ -58,7 +62,6 @@ public:
 		//스위치의 상태 변경 전 비활성화 (단락 방지)
 		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_wheel_pin::H_BRIDGE_LEFT_EN_OUTPUT, LOW);
 		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_wheel_pin::H_BRIDGE_RIGHT_EN_OUTPUT, LOW);
-		commonShiftRegPwmInstance.WriteShiftReg();
 
 		int leftWheelRotateSpeed = 0; //왼쪽 바퀴 회전 속도
 		int rightWheelRotateSpeed = 0; //오른쪽 바퀴 회전 속도
@@ -121,7 +124,6 @@ public:
 		//각 바퀴의 회전 속도에 따라 제어
 		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_wheel_pin::H_BRIDGE_LEFT_EN_OUTPUT, leftWheelRotateSpeed);
 		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_wheel_pin::H_BRIDGE_RIGHT_EN_OUTPUT, rightWheelRotateSpeed);
-		commonShiftRegPwmInstance.WriteShiftReg();
 	}
 
 private:

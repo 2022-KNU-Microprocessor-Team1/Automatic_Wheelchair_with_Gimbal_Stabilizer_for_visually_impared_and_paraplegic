@@ -1,20 +1,31 @@
 #ifndef _WHEELCHAIR_HPP_
 #define _WHEELCHAIR_HPP_
 
+#include "./Wheelchair_Core.h"
+
 /// <summary>
 /// 휠체어 제어
 /// </summary>
 class WHEELCHAIR
 {
 public:
+	/// <summary>
+	/// 
+	/// </summary>
 	WHEELCHAIR()
 	{	
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	~WHEELCHAIR()
 	{
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
 	void Init()
 	{
 		pinMode(wheel_pin::H_BRIDGE_LEFT_INPUT1, INPUT);
@@ -29,6 +40,9 @@ public:
 		this->_gimbalStabilizer.Init();
 	}
 
+	/// <summary>
+	/// 작업 수행
+	/// </summary>
 	void RunTask()
 	{
 

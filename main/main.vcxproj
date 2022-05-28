@@ -23,9 +23,9 @@
     <None Include="main.ino" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="common\CommonShiftRegPwm.hpp" />
     <ClInclude Include="module\BodyMove.hpp" />
     <ClInclude Include="module\CollisionAlert.hpp" />
+    <ClInclude Include="module\CommonShiftRegPwm.hpp" />
     <ClInclude Include="module\GimbalStabilizer.hpp" />
     <ClInclude Include="template\Singleton.hpp" />
     <ClInclude Include="Wheelchair.hpp" />

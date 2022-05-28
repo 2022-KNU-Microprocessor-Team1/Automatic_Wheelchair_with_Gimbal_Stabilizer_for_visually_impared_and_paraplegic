@@ -32,9 +32,6 @@
     <ClInclude Include="template\Singleton.hpp">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="common\CommonShiftRegPwm.hpp">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
     <ClInclude Include="module\CollisionAlert.hpp">
       <Filter>소스 파일</Filter>
     </ClInclude>
@@ -45,6 +42,9 @@
       <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="module\BodyMove.hpp">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="module\CommonShiftRegPwm.hpp">
       <Filter>소스 파일</Filter>
     </ClInclude>
   </ItemGroup>

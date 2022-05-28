@@ -1,6 +1,8 @@
 #ifndef _GIMBAL_STABILIZER_HPP_
 #define _GIMBAL_STABILIZER_HPP_
 
+#include "../Wheelchair_Core.h"
+
 /// <summary>
 /// 수평 유지 장치
 /// </summary>
@@ -22,12 +24,20 @@ public:
 	{
 	}
 
+	/// <summary>
+	/// 초기화
+	/// </summary>
 	void Init() const
 	{
 
 	}
 
-	void RunTask(); //TODO : x, y에 대해 읽어서 서보 모터 제어 (Servo.h 사용)
+	/// <summary>
+	/// 작업 수행
+	/// </summary>
+	void RunTask() //TODO : x, y에 대해 읽어서 서보 모터 제어 (Servo.h 사용)
+	{
+	}
 
 private:
 

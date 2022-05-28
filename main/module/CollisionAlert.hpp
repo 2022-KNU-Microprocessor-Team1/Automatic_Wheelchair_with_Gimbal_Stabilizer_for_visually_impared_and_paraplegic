@@ -1,6 +1,10 @@
 #ifndef _COLLISION_ALERT_HPP_
 #define _COLLISION_ALERT_HPP_
 
+#include "../Wheelchair_Core.h"
+
+//#include <Servo.h>
+
 #define MIN_HCSR04_CM_RANGE 2 //초음파 거리 센서 최소 측정 가능 범위 (cm 단위)
 #define MAX_HCSR04_CM_RANGE 400 //초음파 거리 센서 최대 측정 가능 범위 (cm 단위)
 
@@ -33,6 +37,9 @@ public:
 	{
 	}
 
+	/// <summary>
+	/// 초기화
+	/// </summary>
 	void Init() const
 	{
 		pinMode(collision_alert_pin::HCSR04_BACKWARD_ECHO_INPUT, INPUT);
@@ -63,8 +70,6 @@ public:
 			commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collision_alert_pin::LED_OUTPUT, MIN_PWM_VALUE);
 			commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collision_alert_pin::PIEZO_OUTPUT, MIN_PWM_VALUE);
 		}
-
-		commonShiftRegPwmInstance.WriteShiftReg();
 	}
 
 public:
@@ -103,15 +108,12 @@ private:
 		//10마이크로초 이상 길이 (HIGH에 대한)의 펄스를 트리거 핀에 주어 작동 시작
 		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collision_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, LOW);
 		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collision_alert_pin::HCSR04_FORWARD_TRIG_OUTPUT, LOW);
-		commonShiftRegPwmInstance.WriteShiftReg();
 		delayMicroseconds(5);
 		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collision_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, HIGH);
 		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collision_alert_pin::HCSR04_FORWARD_TRIG_OUTPUT, HIGH);
-		commonShiftRegPwmInstance.WriteShiftReg();
 		delayMicroseconds(10);
 		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collision_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, LOW);
 		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collision_alert_pin::HCSR04_FORWARD_TRIG_OUTPUT, LOW);
-		commonShiftRegPwmInstance.WriteShiftReg();
 
 		DISTANCE_CM retVal = { 0, };
 
