@@ -19,25 +19,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include=".\common\CommonShiftRegPwm.cpp" />
-    <ClCompile Include=".\manager\CollisionAlertManager.cpp" />
-    <ClCompile Include=".\manager\GimbalStabilityManager.cpp" />
-    <ClCompile Include=".\manager\MoveManager.cpp" />
-    <ClCompile Include=".\Wheelchair.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include=".\common\CommonShiftRegPwm.h" />
-    <ClInclude Include=".\manager\CollisionAlertManager.h" />
-    <ClInclude Include=".\manager\GimbalStabilityManager.h" />
-    <ClInclude Include=".\manager\MoveManager.h" />
-    <ClInclude Include=".\template\Singleton.hpp" />
-    <ClInclude Include=".\Wheelchair.h" />
-    <ClInclude Include=".\Wheelchair_Core.h" />
-    <ClInclude Include="Wheelchair_Pin.h" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include=".editorconfig" />
     <None Include="main.ino" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="common\CommonShiftRegPwm.hpp" />
+    <ClInclude Include="module\BodyMove.hpp" />
+    <ClInclude Include="module\CollisionAlert.hpp" />
+    <ClInclude Include="module\GimbalStabilizer.hpp" />
+    <ClInclude Include="template\Singleton.hpp" />
+    <ClInclude Include="Wheelchair.hpp" />
+    <ClInclude Include="Wheelchair_Core.h" />
+    <ClInclude Include="Wheelchair_Pin.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

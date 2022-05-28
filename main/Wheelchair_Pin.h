@@ -1,4 +1,4 @@
-﻿#ifndef _WHEELCHAIR_PIN_H_
+#ifndef _WHEELCHAIR_PIN_H_
 #define _WHEELCHAIR_PIN_H_
 
 /// <summary>
@@ -18,13 +18,13 @@ namespace shift_reg_pin
 	/// <summary>
 	/// 쉬프트 레지스터의 출력에 대한 충돌 감지 알림 핀 정의
 	/// </summary>
-	namespace inner_collison_alert_pin
+	namespace inner_collision_alert_pin
 	{
-		const char HCSR04_BACKWARD_TRIG_OUTPUT = 0; //후방 장애물 감지 초음파 센서 트리거 핀 (PWM)
-		const char HCSR04_FORWARD_TRIG_OUTPUT = 1; //전방 장애물 감지 초음파 센서 트리거 핀 (PWM)
+		const uint8_t HCSR04_BACKWARD_TRIG_OUTPUT = 0; //후방 장애물 감지 초음파 센서 트리거 핀 (PWM)
+		const uint8_t HCSR04_FORWARD_TRIG_OUTPUT = 1; //전방 장애물 감지 초음파 센서 트리거 핀 (PWM)
 
-		const char PIEZO_OUTPUT = 4; //충돌 경고 피에조 부저 (PWM)
-		const char LED_OUTPUT = 5; //충돌 경고 LED (PWM)
+		const uint8_t PIEZO_OUTPUT = 4; //충돌 경고 피에조 부저 (PWM)
+		const uint8_t LED_OUTPUT = 5; //충돌 경고 LED (PWM)
 	}
 
 	/// <summary>
@@ -32,11 +32,10 @@ namespace shift_reg_pin
 	/// </summary>
 	namespace inner_wheel_pin
 	{
-		const char H_BRIDGE_RIGHT_EN_OUTPUT = 2; //H-브릿지 오른쪽 바퀴 속도 조절을 위한 1,2 활성화 핀 (PWM)
-		const char H_BRIDGE_LEFT_EN_OUTPUT = 3; //H-브릿지 왼쪽 바퀴 속도 조절을 위한 3,4 활성화 핀 (PWM)
+		const uint8_t H_BRIDGE_RIGHT_EN_OUTPUT = 2; //H-브릿지 오른쪽 바퀴 속도 조절을 위한 1,2 활성화 핀 (PWM)
+		const uint8_t H_BRIDGE_LEFT_EN_OUTPUT = 3; //H-브릿지 왼쪽 바퀴 속도 조절을 위한 3,4 활성화 핀 (PWM)
 	}
 }
-
 
 /// <summary>
 /// 충돌 경고 위한 핀 정의
@@ -46,7 +45,7 @@ namespace collision_alert_pin
 	const int HCSR04_BACKWARD_ECHO_INPUT = 13; //후방 장애물 감지 초음파 센서 에코 핀
 	const int HCSR04_FORWARD_ECHO_INPUT = 12; //전방 장애물 감지 초음파 센서 에코 핀
 
-	const int Gl5537_ANALOG_INPUT = 0; //조도 센서 (ANALOG)
+	const int Gl5537_ANALOG_INPUT = A0; //조도 센서 (ANALOG)
 }
 
 /// <summary>
@@ -68,7 +67,7 @@ namespace gimbal_pin
 namespace ir_comm_pin
 {
 	//TODO : 리모콘 버튼 입력 시 이동
-	const int IR_INPUT;
+	const int IR_INPUT = 999;
 
 }
 
