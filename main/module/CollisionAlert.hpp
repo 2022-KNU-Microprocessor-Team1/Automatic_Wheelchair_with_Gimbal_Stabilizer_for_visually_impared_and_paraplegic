@@ -104,8 +104,9 @@ private:
 
 		// https://randomnerdtutorials.com/complete-guide-for-ultrasonic-sensor-hc-sr04/
 		// https://www.arduino.cc/reference/ko/language/functions/advanced-io/pulsein/
-
+		// https://www.best-microcontroller-projects.com/arduino-millis.html
 		//10마이크로초 이상 길이 (HIGH에 대한)의 펄스를 트리거 핀에 주어 작동 시작
+
 		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collision_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, LOW);
 		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collision_alert_pin::HCSR04_FORWARD_TRIG_OUTPUT, LOW);
 		delayMicroseconds(5);

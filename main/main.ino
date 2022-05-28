@@ -11,7 +11,7 @@ void setup()
   Serial.begin(BITS_PER_SECONDS);
 #endif
 
-wheelchair.Init();
+  wheelchair.Init();
 }
 
 /// <summary>

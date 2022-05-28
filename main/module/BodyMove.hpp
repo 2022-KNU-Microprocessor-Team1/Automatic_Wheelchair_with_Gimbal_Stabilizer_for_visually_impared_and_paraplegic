@@ -8,6 +8,34 @@
 #define MAX_WHEEL_ROTATE_SPEED (MAX_PWM_VALUE - 155) //최대 바퀴 회전 속도
 
 /// <summary>
+/// 적외선 통신 리모콘 버튼 값
+/// </summary>
+enum class IR_REMOTE_VALUE : const uint32_t
+{
+	N0 = 0xFFE21D, //0
+	N1 = 0xFF30CF, //1
+	N2 = 0xFF18E7, //2
+	N3 = 0xFF7A85, //3
+	N4 = 0xFF10EF, //4
+	N5 = 0xFF38C7, //5
+	N6 = 0xFF5AA5, //6
+	N7 = 0xFF42BD, //7
+	N8 = 0xFF4AB5, //8
+	N9 = 0xFF52AD, //9
+	N100P = 0xFF9867, //100+
+	N200P = 0xFFB04F, //200+
+	MINUS = 0xFFE01F, //-
+	PLUS = 0xFFA857, //+
+	EQ = 0xFF906F, //EQ
+	PREV = 0xFF22DD, //|<<
+	NEXT = 0xFF02FD, //>>|
+	PLAY = 0xFFC23D, //>||
+	CH_PREV = 0xFFA25D, //CH-
+	CH = 0xFF629D, //CH
+	CH_NEXT = 0xFFE21D //CH+
+};
+
+/// <summary>
 /// 이동 방향
 /// </summary>
 enum class MOVE_DIRECTION : const int

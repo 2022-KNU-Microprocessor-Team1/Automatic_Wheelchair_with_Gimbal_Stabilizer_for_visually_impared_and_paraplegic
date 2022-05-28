@@ -3,14 +3,20 @@
 
 #include "../Wheelchair_Core.h"
 
+#define ShiftRegisterPWM_CUSTOM_INTERRUPT
 #include <ShiftRegisterPWM.h> // https://github.com/Simsso/ShiftRegister-PWM-Library
 #include <TimerThree.h> // https://github.com/PaulStoffregen/TimerThree
 
 #define NUM_OF_SHIFT_REG 1 //쉬프트 레지스터 개수
 #define SHIFT_REG_OUTPUT_PIN_COUNT (NUM_OF_SHIFT_REG * 8) //쉬프트 레지스터의 총 출력 핀 개수
-	
 #define SHIFT_REG_PWM_RESOLUTION (MAX_PWM_VALUE) //쉬프트 레지스터 PWM 출력 위한 해상도 (1 ~ 255)
-#define TIMER_INTERRUPT_MS 5 //하드웨어 타이머 인터럽트 발생 단위 시간 (ms)
+
+/***
+	인터럽트 발생 시 흐름이 ISR로 넘어가므로, 기타 센서의 동작을 위해
+	delay를 이용 할 경우, 최대한 방해없는 동작을 위해
+	타이머 인터럽트 발생 단위 시간을 그 이상으로 할당 할 것
+***/
+#define TIMER_INTERRUPT_MS 20 //하드웨어 타이머 인터럽트 발생 단위 시간 (ms)
 
 ShiftRegisterPWM shiftRegPwm(NUM_OF_SHIFT_REG, SHIFT_REG_PWM_RESOLUTION);
 
