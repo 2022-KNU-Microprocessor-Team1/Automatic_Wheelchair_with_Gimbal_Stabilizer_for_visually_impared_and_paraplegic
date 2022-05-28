@@ -15,54 +15,37 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include=".\Wheelchair.cpp">
+    <None Include=".editorconfig">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="main.ino">
       <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include=".\manager\CollisionAlertManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include=".\manager\GimbalStabilityManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include=".\manager\MoveManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include=".\common\CommonShiftRegPwm.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include=".\Wheelchair.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include=".\Wheelchair_Core.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include=".\template\Singleton.hpp">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include=".\manager\CollisionAlertManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include=".\manager\GimbalStabilityManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include=".\manager\MoveManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include=".\common\CommonShiftRegPwm.h">
+    <ClInclude Include="Wheelchair_Core.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Wheelchair_Pin.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="main.ino">
+    <ClInclude Include="template\Singleton.hpp">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="common\CommonShiftRegPwm.hpp">
       <Filter>소스 파일</Filter>
-    </None>
-    <None Include=".editorconfig">
-      <Filter>리소스 파일</Filter>
-    </None>
+    </ClInclude>
+    <ClInclude Include="module\CollisionAlert.hpp">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="module\GimbalStabilizer.hpp">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Wheelchair.hpp">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="module\BodyMove.hpp">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

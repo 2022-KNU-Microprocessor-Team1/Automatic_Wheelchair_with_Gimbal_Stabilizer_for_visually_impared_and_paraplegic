@@ -1,10 +1,5 @@
 #include "./Wheelchair_Core.h"
 
-#ifndef DEBUG_MODE
-#define VAR_DUMP(var) //do nothing
-#define ERROR_LOG(msg) //do nothing
-#endif
-
 WHEELCHAIR wheelchair;
 
 /// <summary>
@@ -16,6 +11,7 @@ void setup()
   Serial.begin(BITS_PER_SECONDS);
 #endif
 
+wheelchair.Init();
 }
 
 /// <summary>

@@ -1,4 +1,4 @@
-﻿#ifndef _WHEELCHAIR_CORE_H_
+#ifndef _WHEELCHAIR_CORE_H_
 #define _WHEELCHAIR_CORE_H_
 
 #define _VAR_DUMP(name, value) Serial.println(String(name) + " : " +  String(value)); //시리얼 통신에 "name : value" 출력
@@ -15,20 +15,24 @@
 #define BITS_PER_SECONDS 9600 //시리얼 통신 위한 초당 비트 단위 전송 속도
 
 #define DEBUG_MODE
+#ifndef DEBUG_MODE
+#define VAR_DUMP(var) //do nothing
+#define ERROR_LOG(msg) //do nothing
+#endif
 
+#include <stdint.h>
 #include <Arduino.h> // https://www.circuitstoday.com/arduino-mega-pinout-schematics
-#include <IRremote.h> // https://arduino-irremote.github.io/Arduino-IRremote/index.html
+//#include <IRremote.h> // https://arduino-irremote.github.io/Arduino-IRremote/index.html
 #include <TimerThree.h> // https://www.pjrc.com/teensy/td_libs_TimerOne.html
 #include <ShiftRegisterPWM.h> // https://timodenk.com/blog/shiftregister-pwm-library/
-#include <Servo.h>
+//#include <Servo.h> //TODO : 서보 타이머 충돌
 
 #include "./Wheelchair_Pin.h"
 #include "./template/Singleton.hpp"
-#include "./common/CommonShiftRegPwm.h"
+#include "./common/CommonShiftRegPwm.hpp"
 
-#include "./manager/MoveManager.h"
-#include "./manager/GimbalStabilityManager.h"
-#include "./manager/CollisionAlertManager.h"
-
-#include "./Wheelchair.h"
+#include "./module/BodyMove.hpp"
+#include "./module/GimbalStabilizer.hpp"
+#include "./module/CollisionAlert.hpp"
+#include "./Wheelchair.hpp"
 #endif
