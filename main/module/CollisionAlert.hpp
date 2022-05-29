@@ -3,8 +3,6 @@
 
 #include "../Wheelchair_Core.h"
 
-//#include <Servo.h>
-
 #define MIN_HCSR04_CM_RANGE 2 //초음파 거리 센서 최소 측정 가능 범위 (cm 단위)
 #define MAX_HCSR04_CM_RANGE 400 //초음파 거리 센서 최대 측정 가능 범위 (cm 단위)
 

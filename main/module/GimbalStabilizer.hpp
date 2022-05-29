@@ -2,6 +2,8 @@
 #define _GIMBAL_STABILIZER_HPP_
 
 #include "../Wheelchair_Core.h"
+//#include <Servo.h>
+//TODO : 서보 라이브러리 다중 정의 오류
 
 /// <summary>
 /// 수평 유지 장치

@@ -21,6 +21,12 @@
     <None Include="main.ino">
       <Filter>소스 파일</Filter>
     </None>
+    <None Include="TIMER.md">
+      <Filter>소스 파일</Filter>
+    </None>
+    <None Include="README.md">
+      <Filter>소스 파일</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Wheelchair_Core.h">

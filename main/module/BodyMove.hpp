@@ -3,16 +3,21 @@
 
 #include "../Wheelchair_Core.h"
 
-//#include "../extern_lib/IRremote/src/IRremote.h" // https://github.com/Arduino-IRremote/Arduino-IRremote
+/***
+	../extern_lib/IRremote/src/private/IRTimer.hpp의 77행 하드웨어 타이머 변경
+	(하드웨어 타이머 2 => 하드웨어 타이머 4)
+***/
+#include "../extern_lib/IRremote/src/IRremote.h" // https://github.com/Arduino-IRremote/Arduino-IRremote
 
-#define MAX_WHEEL_ROTATE_SPEED (MAX_PWM_VALUE - 155) //최대 바퀴 회전 속도
+#define MAX_WHEEL_ROTATE_SPEED (MAX_PWM_VALUE / 3) //최대 바퀴 회전 속도
 
 /// <summary>
-/// 적외선 통신 리모콘 버튼 값
-/// </summary>
-enum class IR_REMOTE_VALUE : const uint32_t
+/// 적외선 통신 Car MP3 SE-020401 리모콘 원시 데이터<para>
+/// https://gist.github.com/steakknife/e419241095f1272ee60f5174f7759867
+/// </para></summary>
+enum class IR_REMOTE_SE_020401_RAWDATA : const uint32_t
 {
-	N0 = 0xFFE21D, //0
+	N0 = 0xFF6897, //0
 	N1 = 0xFF30CF, //1
 	N2 = 0xFF18E7, //2
 	N3 = 0xFF7A85, //3
@@ -40,7 +45,8 @@ enum class IR_REMOTE_VALUE : const uint32_t
 /// </summary>
 enum class MOVE_DIRECTION : const int
 {
-	FORWARD = 0, //전진
+	DO_NOTHING = 0,
+	FORWARD, //전진
 	BACKWARD, //후진
 	LEFT, //제자리 좌회전
 	RIGHT, //제자리 우회전
@@ -69,6 +75,9 @@ public:
 	{
 	}
 
+	/// <summary>
+	/// 초기화
+	/// </summary>
 	void Init()
 	{
 		pinMode(wheel_pin::H_BRIDGE_LEFT_INPUT1, INPUT);
@@ -76,14 +85,75 @@ public:
 		pinMode(wheel_pin::H_BRIDGE_RIGHT_INPUT1, INPUT);
 		pinMode(wheel_pin::H_BRIDGE_RIGHT_INPUT2, INPUT);
 
-		//TODO : 적외선 통신 핀 테스트 후 초기화 수행
+		this->_irrecv.setReceivePin(ir_remote_pin::IR_RECV_INPUT);
+		this->_irrecv.enableIRIn(); //적외선 신호 수신을 위한 타이머 및 State Machine 구성
+	}
+
+	/// <summary>
+	/// 작업 수행
+	/// </summary>
+	void RunTask()
+	{
+		this->MoveTo(this->GetMoveDirectionFromIrRemote());
+	}
+
+private:
+	/// <summary>
+	/// 적외선 통신으로부터 이동 방향 반환
+	/// </summary>
+	/// <returns>이동 방향</returns>
+	MOVE_DIRECTION GetMoveDirectionFromIrRemote()
+	{
+		MOVE_DIRECTION retVal = MOVE_DIRECTION::DO_NOTHING;
+
+		if (this->_irrecv.decode()) //적외선 신호로부터 복호화 된 데이터가 존재하면
+		{
+			switch (IrReceiver.decodedIRData.decodedRawData) //복호화 된 원시 데이터에 따라
+			{
+			case static_cast<uint32_t>(IR_REMOTE_SE_020401_RAWDATA::N2): //전진
+				retVal = MOVE_DIRECTION::FORWARD;
+				break;
+
+			case static_cast<uint32_t>(IR_REMOTE_SE_020401_RAWDATA::N8): //후진
+				retVal = MOVE_DIRECTION::BACKWARD;
+				break;
+
+			case static_cast<uint32_t>(IR_REMOTE_SE_020401_RAWDATA::N4): //제자리 좌회전
+				retVal = MOVE_DIRECTION::LEFT;
+				break;
+
+			case static_cast<uint32_t>(IR_REMOTE_SE_020401_RAWDATA::N6): //제자리 우회전
+				retVal = MOVE_DIRECTION::RIGHT;
+				break;
+
+			case static_cast<uint32_t>(IR_REMOTE_SE_020401_RAWDATA::N1): //좌회전 및 전진
+				retVal = MOVE_DIRECTION::LEFT_AND_FORWARD;
+				break;
+
+			case static_cast<uint32_t>(IR_REMOTE_SE_020401_RAWDATA::N3): //우회전 및 전진
+				retVal = MOVE_DIRECTION::RIGHT_AND_FORWARD;
+				break;
+
+			case static_cast<uint32_t>(IR_REMOTE_SE_020401_RAWDATA::N5): //정지
+				retVal = MOVE_DIRECTION::BRAKE;
+				break;
+
+			default:
+				//do nothing
+				break;
+			}
+
+			this->_irrecv.resume();
+		}
+
+		return retVal;
 	}
 
 	/// <summary>
 	/// 이동 방향에 따라 차체 이동
 	/// </summary>
 	/// <param name="moveDirection">이동 방향</param>
-	void MoveTo(MOVE_DIRECTION moveDirection) const
+	void MoveTo(const MOVE_DIRECTION& moveDirection)
 	{
 		COMMON_SHIFT_REG_PWM& commonShiftRegPwmInstance = COMMON_SHIFT_REG_PWM::GetInstance();
 
@@ -155,6 +225,6 @@ public:
 	}
 
 private:
-
+	IRrecv _irrecv; //IR 신호 수신 개체
 };
 #endif

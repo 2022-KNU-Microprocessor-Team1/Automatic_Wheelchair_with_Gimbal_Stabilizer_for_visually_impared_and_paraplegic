@@ -18,8 +18,6 @@
 ***/
 #define TIMER_INTERRUPT_MS 20 //하드웨어 타이머 인터럽트 발생 단위 시간 (ms)
 
-ShiftRegisterPWM shiftRegPwm(NUM_OF_SHIFT_REG, SHIFT_REG_PWM_RESOLUTION);
-
 void COMMON_SHIFT_REG_PWM_InterruptServiceRoutine_Wrapper();
 
 /// <summary>
@@ -48,9 +46,10 @@ public:
 
 		//하드웨어 타이머 3 사용, 타이머에 의해 인터럽트 발생 시마다 시프트 레지스터 출력 갱신
 		Timer3.initialize(TIMER_INTERRUPT_MS);
-		Timer3.attachInterrupt(COMMON_SHIFT_REG_PWM_InterruptServiceRoutine_Wrapper);
+		Timer3.attachInterrupt(&COMMON_SHIFT_REG_PWM_InterruptServiceRoutine_Wrapper);
 
 		this->ClearPwmData();
+		this->_shiftRegPwm = new ShiftRegisterPWM(NUM_OF_SHIFT_REG, SHIFT_REG_PWM_RESOLUTION);
 	}
 
 	/// <summary>
@@ -88,13 +87,10 @@ public:
 	void InterruptServiceRoutine() const
 	{
 		for (uint8_t i = 0; i < 8; i++) //마지막으로 할당 된 PWM 값 할당
-			shiftRegPwm.set(i, this->_pwmData[i]);
+			this->_shiftRegPwm->set(i, this->_pwmData[i]);
 
-		shiftRegPwm.update();
+		this->_shiftRegPwm->update();
 	}
-
-private:
-	uint8_t _pwmData[SHIFT_REG_OUTPUT_PIN_COUNT]; //쉬프트 레지스터 출력 핀에 출력 될 PWM 데이터 (index : shift_reg_pin에 따름)
 
 private:
 	//상속 시 SINGLETON에서 상속받은 개체의 생성자, 소멸자 접근
@@ -105,6 +101,7 @@ private:
 	/// </summary>
 	COMMON_SHIFT_REG_PWM()
 	{
+		this->_shiftRegPwm = NULL;
 		this->Init();
 	}
 
@@ -113,7 +110,13 @@ private:
 	/// </summary>
 	~COMMON_SHIFT_REG_PWM()
 	{
+		delete this->_shiftRegPwm;
+		this->_shiftRegPwm = NULL;
 	}
+
+private:
+	uint8_t _pwmData[SHIFT_REG_OUTPUT_PIN_COUNT]; //쉬프트 레지스터 출력 핀에 출력 될 PWM 데이터 (index : shift_reg_pin에 따름)
+	class ShiftRegisterPWM* _shiftRegPwm;
 };
 
 /// <summary>

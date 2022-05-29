@@ -21,6 +21,8 @@
   <ItemGroup>
     <None Include=".editorconfig" />
     <None Include="main.ino" />
+    <None Include="README.md" />
+    <None Include="TIMER.md" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="module\BodyMove.hpp" />

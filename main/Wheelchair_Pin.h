@@ -64,7 +64,7 @@ namespace gimbal_pin
 /// <summary>
 /// 적외선 통신 핀 정의
 /// </summary>
-namespace ir_comm_pin
+namespace ir_remote_pin
 {
 	//TODO : 리모콘 버튼 입력 시 이동
 	const int IR_RECV_INPUT = A1; //적외선 통신 수신 입력 (ANALOG)

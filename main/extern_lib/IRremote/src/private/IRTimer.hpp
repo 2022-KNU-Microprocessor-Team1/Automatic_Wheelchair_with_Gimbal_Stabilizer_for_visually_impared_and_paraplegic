@@ -78,9 +78,9 @@
 #elif defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
 #  if !defined(IR_USE_AVR_TIMER1) && !defined(IR_USE_AVR_TIMER2) && !defined(IR_USE_AVR_TIMER3) && !defined(IR_USE_AVR_TIMER4) && !defined(IR_USE_AVR_TIMER5)
 //#define IR_USE_AVR_TIMER1   // send pin = pin 11
-#define IR_USE_AVR_TIMER2     // send pin = pin 9
+//#define IR_USE_AVR_TIMER2     // send pin = pin 9
 //#define IR_USE_AVR_TIMER3   // send pin = pin 5
-//#define IR_USE_AVR_TIMER4   // send pin = pin 6
+#define IR_USE_AVR_TIMER4   // send pin = pin 6
 //#define IR_USE_AVR_TIMER5   // send pin = pin 46
 #  endif
 
@@ -1203,7 +1203,7 @@ void timerConfigForReceive() {
     } // wait for sync
       // Reset TCx
     TC->CTRLA.reg = TC_CTRLA_SWRST;
-    // When writing a ‘1’ to the CTRLA.SWRST bit it will immediately read as ‘1’.
+    // When writing a ??to the CTRLA.SWRST bit it will immediately read as ??
     // CTRL.SWRST will be cleared by hardware when the peripheral has been reset.
     while (TC->CTRLA.bit.SWRST) {
     }
