@@ -21,13 +21,31 @@
 #endif
 
 #include <stdint.h>
-#include <Arduino.h> // https://www.circuitstoday.com/arduino-mega-pinout-schematics
+#include <Arduino.h> // https://github.com/arduino/ArduinoCore-avr
+
+#if defined(ARDUINO_ARCH_AVR)
+#pragma message("Target Architecture : ARDUINO_ARCH_AVR")
+#elif defined(ARDUINO_ARCH_SAM)
+#pragma message("Target Architecture : ARDUINO_ARCH_SAM")
+#elif defined(ARDUINO_ARCH_SAMD)
+#pragma message("Target Architecture : ARDUINO_ARCH_SAMD")
+#elif defined(ARDUINO_ARCH_STM32F4)
+#pragma message("Target Architecture : ARDUINO_ARCH_STM32F4")
+#elif defined(ARDUINO_ARCH_NRF52)
+#pragma message("Target Architecture : ARDUINO_ARCH_NRF52")
+#elif defined(ARDUINO_ARCH_MEGAAVR)
+#pragma message("Target Architecture : ARDUINO_ARCH_MEGAAVR")
+#elif defined(ARDUINO_ARCH_MBED)
+#pragma message("Target Architecture : ARDUINO_ARCH_MBED")
+#else
+#pragma message("Unknown Architecture")
+#endif
 
 #include "./template/Singleton.hpp"
 #include "./Wheelchair_Pin.h"
 
 #include "./module/CommonShiftRegPwm.hpp"
-#include "./module/BodyMove.hpp"
+#include "./module/Move.hpp"
 #include "./module/GimbalStabilizer.hpp"
 #include "./module/CollisionAlert.hpp"
 #include "./Wheelchair.hpp"

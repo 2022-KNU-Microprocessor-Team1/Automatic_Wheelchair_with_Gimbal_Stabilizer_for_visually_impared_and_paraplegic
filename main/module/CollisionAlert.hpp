@@ -36,7 +36,7 @@ public:
 	}
 
 	/// <summary>
-	/// 초기화
+	/// 초기화 작업 수행
 	/// </summary>
 	void Init() const
 	{

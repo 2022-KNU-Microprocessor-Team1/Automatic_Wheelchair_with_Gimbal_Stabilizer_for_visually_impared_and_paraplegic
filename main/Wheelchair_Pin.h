@@ -53,8 +53,8 @@ namespace collision_alert_pin
 /// </summary>
 namespace gimbal_pin
 {
-	const int X_AXIS_SERVO_OUTPUT = 6; //x축에 대한 서보 모터 (PWM)
-	const int Y_AXIS_SERVO_OUTPUT = 5; //y축에 대한 서보 모터 (PWM)
+	const int X_AXIS_SERVO_OUTPUT = 10; //x축에 대한 서보 모터 (PWM)
+	const int Y_AXIS_SERVO_OUTPUT = 9; //y축에 대한 서보 모터 (PWM)
 
 	//TODO : 기울기 센서 아날로그 입력 혹은 디지털 입력 테스트
 	const int X_AXIS_GIMBAL_INPUT = 9999; //x축에 대한 기울기 센서
@@ -66,7 +66,6 @@ namespace gimbal_pin
 /// </summary>
 namespace ir_remote_pin
 {
-	//TODO : 리모콘 버튼 입력 시 이동
 	const int IR_RECV_INPUT = A1; //적외선 통신 수신 입력 (ANALOG)
 }
 
@@ -75,10 +74,10 @@ namespace ir_remote_pin
 /// </summary>
 namespace wheel_pin
 {
-	const int H_BRIDGE_LEFT_INPUT1 = 11; //H-브릿지 왼쪽 바퀴 입력 핀 1
-	const int H_BRIDGE_LEFT_INPUT2 = 10; //H-브릿지 왼쪽 바퀴 입력 핀 2
+	const int H_BRIDGE_LEFT_INPUT1 = 6; //H-브릿지 왼쪽 바퀴 입력 핀 1
+	const int H_BRIDGE_LEFT_INPUT2 = 5; //H-브릿지 왼쪽 바퀴 입력 핀 2
 
-	const int H_BRIDGE_RIGHT_INPUT1 = 9; //H-브릿지 오른쪽 바퀴 입력 핀 1
-	const int H_BRIDGE_RIGHT_INPUT2 = 8; //H-브릿지 오른쪽 바퀴 입력 핀 2
+	const int H_BRIDGE_RIGHT_INPUT1 = 8; //H-브릿지 오른쪽 바퀴 입력 핀 1
+	const int H_BRIDGE_RIGHT_INPUT2 = 7; //H-브릿지 오른쪽 바퀴 입력 핀 2
 }
 #endif

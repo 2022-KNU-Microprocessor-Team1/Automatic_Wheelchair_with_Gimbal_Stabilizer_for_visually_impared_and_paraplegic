@@ -1,4 +1,4 @@
-## < Arduino MEGA 2560 하드웨어 타이머 >
+## < Arduino Mega 2560 하드웨어 타이머 >
 
 ---
 
@@ -7,7 +7,7 @@
 | Timer 0 (8bit) | millis(), micros(), delay() |
 | Timer 1 (16bit) | Servo.h |
 | Timer 2 (8bit) | tone() | 
-| Timer 3 (16bit) | ShiftRegPWM 출력 위해 TimerThree |
+| Timer 3 (16bit) | ShiftRegPWM 출력 위한 TimerThree |
 | Timer 4 (16bit) | 적외선 통신 (IRremote.h) |
 | Timer 5 (16bit) | - |
 

@@ -2,8 +2,11 @@
 #define _GIMBAL_STABILIZER_HPP_
 
 #include "../Wheelchair_Core.h"
-//#include <Servo.h>
-//TODO : 서보 라이브러리 다중 정의 오류
+
+/***
+TODO : 서보 하드웨어 타이머 충돌
+***/
+#include <Servo.h> // https://github.com/arduino-libraries/Servo
 
 /// <summary>
 /// 수평 유지 장치
@@ -16,7 +19,6 @@ public:
 	/// </summary>
 	GIMBAL_STABILIZER()
 	{
-		//TODO : 기울기 센서 핀 테스트 후 초기화 수행
 	}
 
 	/// <summary>
@@ -27,21 +29,41 @@ public:
 	}
 
 	/// <summary>
-	/// 초기화
+	/// 초기화 작업 수행
 	/// </summary>
-	void Init() const
+	void Init()
 	{
+		if (this->_xAxisServo.attach(gimbal_pin::X_AXIS_SERVO_OUTPUT) != INVALID_SERVO)
+			goto THROW_INVALID_SERVO_EX;
 
+		if (this->_yAxisServo.attach(gimbal_pin::Y_AXIS_SERVO_OUTPUT) != INVALID_SERVO)
+			goto THROW_INVALID_SERVO_EX;
+
+		return;
+
+	THROW_INVALID_SERVO_EX:
+		ERROR_LOG("Failed to attach Servo");
+		while (1);
 	}
 
 	/// <summary>
 	/// 작업 수행
 	/// </summary>
-	void RunTask() //TODO : x, y에 대해 읽어서 서보 모터 제어 (Servo.h 사용)
+	void RunTask()
 	{
 	}
 
 private:
+	/// <summary>
+	/// x 및 y축에 대한 경사각 반환
+	/// </summary>
+	void GetDipAngleXY()
+	{
+		//TOOD : x및 y축에 대한 현재 경사각 반환
+	}
 
+private:
+	Servo _xAxisServo; //x축에 대한 서보 모터 (roll)
+	Servo _yAxisServo; //y축에 대한 서보 모터 (pitch)
 };
 #endif

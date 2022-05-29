@@ -10,21 +10,21 @@ class WHEELCHAIR
 {
 public:
 	/// <summary>
-	/// 
+	/// WHEELCHAIR 생성자
 	/// </summary>
 	WHEELCHAIR()
 	{	
 	}
 
 	/// <summary>
-	/// 
+	/// WHEELCHAIR 소멸자
 	/// </summary>
 	~WHEELCHAIR()
 	{
 	}
 
 	/// <summary>
-	/// 
+	/// 초기화 작업 수행
 	/// </summary>
 	void Init()
 	{
@@ -35,7 +35,7 @@ public:
 		pinMode(collision_alert_pin::HCSR04_BACKWARD_ECHO_INPUT, INPUT);
 		pinMode(collision_alert_pin::HCSR04_FORWARD_ECHO_INPUT, INPUT);
 
-		this->_bodyMove.Init();
+		this->_move.Init();
 		this->_collisionAlert.Init();
 		this->_gimbalStabilizer.Init();
 	}
@@ -49,8 +49,8 @@ public:
 	}
 
 private:
-	BODY_MOVE _bodyMove;
-	GIMBAL_STABILIZER _gimbalStabilizer;
-	COLLISION_ALERT _collisionAlert;
+	MOVE _move; //차체 이동
+	GIMBAL_STABILIZER _gimbalStabilizer; //수평 안정화 장치
+	COLLISION_ALERT _collisionAlert; //충돌 경고
 };
 #endif

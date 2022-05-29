@@ -4,15 +4,15 @@
 #include "../Wheelchair_Core.h"
 
 #define ShiftRegisterPWM_CUSTOM_INTERRUPT
-#include <ShiftRegisterPWM.h> // https://github.com/Simsso/ShiftRegister-PWM-Library
-#include <TimerThree.h> // https://github.com/PaulStoffregen/TimerThree
+#include "../extern_lib/ShiftRegister-PWM-Library/src/ShiftRegisterPWM.h" // https://github.com/Simsso/ShiftRegister-PWM-Library
+#include "../extern_lib/TimerThree/TimerThree.h" // https://github.com/PaulStoffregen/TimerThree
 
 #define NUM_OF_SHIFT_REG 1 //쉬프트 레지스터 개수
 #define SHIFT_REG_OUTPUT_PIN_COUNT (NUM_OF_SHIFT_REG * 8) //쉬프트 레지스터의 총 출력 핀 개수
 #define SHIFT_REG_PWM_RESOLUTION (MAX_PWM_VALUE) //쉬프트 레지스터 PWM 출력 위한 해상도 (1 ~ 255)
 
 /***
-	인터럽트 발생 시 흐름이 ISR로 넘어가므로, 기타 센서의 동작을 위해
+	인터럽트 발생 시 흐름이 ISR로 넘어가므로, 기타 센서의 동작 시 지연시간을 위해
 	delay를 이용 할 경우, 최대한 방해없는 동작을 위해
 	타이머 인터럽트 발생 단위 시간을 그 이상으로 할당 할 것
 ***/
@@ -27,7 +27,7 @@ class COMMON_SHIFT_REG_PWM : public SINGLETON<COMMON_SHIFT_REG_PWM>
 {
 public:
 	/// <summary>
-	/// 초기화
+	/// 초기화 작업 수행
 	/// </summary>
 	void Init()
 	{
@@ -44,20 +44,20 @@ public:
 		pinMode(shift_reg_pin::inner_wheel_pin::H_BRIDGE_RIGHT_EN_OUTPUT, OUTPUT);
 		pinMode(shift_reg_pin::inner_wheel_pin::H_BRIDGE_LEFT_EN_OUTPUT, OUTPUT);
 
+		this->ClearPwmData();
+		this->_shiftRegPwm = new ShiftRegisterPWM(NUM_OF_SHIFT_REG, SHIFT_REG_PWM_RESOLUTION);
+
 		//하드웨어 타이머 3 사용, 타이머에 의해 인터럽트 발생 시마다 시프트 레지스터 출력 갱신
 		Timer3.initialize(TIMER_INTERRUPT_MS);
 		Timer3.attachInterrupt(&COMMON_SHIFT_REG_PWM_InterruptServiceRoutine_Wrapper);
-
-		this->ClearPwmData();
-		this->_shiftRegPwm = new ShiftRegisterPWM(NUM_OF_SHIFT_REG, SHIFT_REG_PWM_RESOLUTION);
 	}
 
 	/// <summary>
-	/// 쉬프트 레지스터 출력 핀에 출력 될 PWM 데이터 초기화
+	/// 쉬프트 레지스터 출력 핀에 출력 될 PWM 데이터 초기화 작업 수행
 	/// </summary>
 	void ClearPwmData()
 	{
-		memset(this->_pwmData, MIN_PWM_VALUE, (sizeof(unsigned char) * 8));
+		memset(this->_pwmData, MIN_PWM_VALUE, (sizeof(unsigned char) * SHIFT_REG_OUTPUT_PIN_COUNT));
 	}
 
 	/// <summary>
@@ -70,7 +70,7 @@ public:
 		if (index >= SHIFT_REG_OUTPUT_PIN_COUNT)
 		{
 			ERROR_LOG("Pwm Index - Out Of Range");
-			return;
+			while (1);
 		}
 
 		/***

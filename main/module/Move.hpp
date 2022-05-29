@@ -1,10 +1,12 @@
-#ifndef _BODY_MOVE_HPP_
-#define _BODY_MOVE_HPP_
+#ifndef _MOVE_HPP_
+#define _MOVE_HPP_
 
 #include "../Wheelchair_Core.h"
 
 /***
-	../extern_lib/IRremote/src/private/IRTimer.hpp의 77행 하드웨어 타이머 변경
+ 	< 하드웨어 타이머 변경 >
+
+	../extern_lib/IRremote/src/private/IRTimer.hpp : 77행
 	(하드웨어 타이머 2 => 하드웨어 타이머 4)
 ***/
 #include "../extern_lib/IRremote/src/IRremote.h" // https://github.com/Arduino-IRremote/Arduino-IRremote
@@ -58,25 +60,25 @@ enum class MOVE_DIRECTION : const int
 /// <summary>
 /// 차체 이동
 /// </summary>
-class BODY_MOVE
+class MOVE
 {
 public:
 	/// <summary>
-	/// BODY_MOVE 생성자
+	/// MOVE 생성자
 	/// </summary>
-	BODY_MOVE()
+	MOVE()
 	{
 	}
 
 	/// <summary>
-	/// BODY_MOVE 소멸자
+	/// MOVE 소멸자
 	/// </summary>
-	~BODY_MOVE()
+	~MOVE()
 	{
 	}
 
 	/// <summary>
-	/// 초기화
+	/// 초기화 작업 수행
 	/// </summary>
 	void Init()
 	{
@@ -191,6 +193,9 @@ private:
 
 		case MOVE_DIRECTION::BRAKE:
 			break;
+
+		default:
+			break;
 		}
 
 		switch (moveDirection) //이동 방향에 따라 H-브릿지 출력 방향 설정
@@ -216,6 +221,9 @@ private:
 			break;
 
 		case MOVE_DIRECTION::BRAKE:
+			break;
+
+		default:
 			break;
 		}
 

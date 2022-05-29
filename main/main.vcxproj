@@ -25,7 +25,7 @@
     <None Include="TIMER.md" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="module\BodyMove.hpp" />
+    <ClInclude Include="module\Move.hpp" />
     <ClInclude Include="module\CollisionAlert.hpp" />
     <ClInclude Include="module\CommonShiftRegPwm.hpp" />
     <ClInclude Include="module\GimbalStabilizer.hpp" />

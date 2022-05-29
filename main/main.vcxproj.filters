@@ -47,7 +47,7 @@
     <ClInclude Include="Wheelchair.hpp">
       <Filter>소스 파일</Filter>
     </ClInclude>
-    <ClInclude Include="module\BodyMove.hpp">
+    <ClInclude Include="module\Move.hpp">
       <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="module\CommonShiftRegPwm.hpp">
