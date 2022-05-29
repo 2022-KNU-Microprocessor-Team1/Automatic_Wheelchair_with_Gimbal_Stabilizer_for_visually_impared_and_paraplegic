@@ -2,11 +2,7 @@
 #define _GIMBAL_STABILIZER_HPP_
 
 #include "../Wheelchair_Core.h"
-
-/***
-TODO : 서보 하드웨어 타이머 충돌
-***/
-#include <Servo.h> // https://github.com/arduino-libraries/Servo
+#include "../extern_lib/Servo-avr-custom/Servo.hpp" // https://github.com/arduino-libraries/Servo
 
 /// <summary>
 /// 수평 유지 장치
@@ -59,7 +55,7 @@ private:
 	/// </summary>
 	void GetDipAngleXY()
 	{
-		//TOOD : x및 y축에 대한 현재 경사각 반환
+		//TOOD : x및 y축에 대한 현재 경사각 반환, 센서 테스트 필요
 	}
 
 private:

@@ -23,22 +23,23 @@
 #include <stdint.h>
 #include <Arduino.h> // https://github.com/arduino/ArduinoCore-avr
 
+#pragma message("--- Target Architecture ---")
 #if defined(ARDUINO_ARCH_AVR)
-#pragma message("Target Architecture : ARDUINO_ARCH_AVR")
+#pragma message("ARDUINO_ARCH_AVR")
 #elif defined(ARDUINO_ARCH_SAM)
-#pragma message("Target Architecture : ARDUINO_ARCH_SAM")
+#pragma message("ARDUINO_ARCH_SAM")
 #elif defined(ARDUINO_ARCH_SAMD)
-#pragma message("Target Architecture : ARDUINO_ARCH_SAMD")
+#pragma message("ARDUINO_ARCH_SAMD")
 #elif defined(ARDUINO_ARCH_STM32F4)
-#pragma message("Target Architecture : ARDUINO_ARCH_STM32F4")
+#pragma message("ARDUINO_ARCH_STM32F4")
 #elif defined(ARDUINO_ARCH_NRF52)
-#pragma message("Target Architecture : ARDUINO_ARCH_NRF52")
+#pragma message("ARDUINO_ARCH_NRF52")
 #elif defined(ARDUINO_ARCH_MEGAAVR)
-#pragma message("Target Architecture : ARDUINO_ARCH_MEGAAVR")
+#pragma message("ARDUINO_ARCH_MEGAAVR")
 #elif defined(ARDUINO_ARCH_MBED)
-#pragma message("Target Architecture : ARDUINO_ARCH_MBED")
+#pragma message("ARDUINO_ARCH_MBED")
 #else
-#pragma message("Unknown Architecture")
+#error "Unknown Architecture"
 #endif
 
 #include "./template/Singleton.hpp"

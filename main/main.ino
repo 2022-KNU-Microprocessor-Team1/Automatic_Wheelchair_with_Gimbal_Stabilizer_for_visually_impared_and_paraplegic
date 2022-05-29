@@ -1,5 +1,9 @@
 #include "./Wheelchair_Core.h"
 
+/***
+	Mega 2560 사용되는 하드웨어 타이머 : TIMER.md
+***/
+
 WHEELCHAIR wheelchair;
 
 /// <summary>
