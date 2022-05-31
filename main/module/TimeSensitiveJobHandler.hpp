@@ -3,6 +3,10 @@
 
 #include "../Wheelchair_Core.h"
 
+// https://www.best-microcontroller-projects.com/arduino-millis.html
+// https://www.best-microcontroller-projects.com/arduino-timer-interrupt.html
+// https://forum.arduino.cc/t/delay-and-interrupts/405046
+
 using TIME_SENSITIVE_JOB_ADDR_TYPE = void(*)(void); //Time Sensitive 작업
 
 /// <summary>
@@ -12,36 +16,42 @@ class TIME_SENSITIVE_JOB_HANDLER
 {
 public:
 	/// <summary>
-	/// Time Sensitive한 작업 수행
+	/// Time Sensitive 작업 수행 (인터럽트 차단)
 	/// </summary>
 	/// <param name="timeSensitiveJobAddrType">Time Sensitive 작업</param>
-	static inline void HandleTimeSensitiveJob(TIME_SENSITIVE_JOB_ADDR_TYPE timeSensitiveJobAddrType)
+	static inline void HandleBlockingInterruptJob(TIME_SENSITIVE_JOB_ADDR_TYPE timeSensitiveJobAddrType)
 	{
 		cli(); //인터럽트 비활성화
-		timeSensitiveJobAddrType; //run
+		timeSensitiveJobAddrType(); //run
 		sei(); //인터럽트 재활성화
 	}
 
 	/// <summary>
-	/// Time Sensitive한 밀리초 단위 지연 수행
+	/// 밀리초 단위 지연 수행 (인터럽트 비차단)
 	/// </summary>
 	/// <param name="milliseconds">밀리초 단위 시간</param>
-	static inline void HandleTimeSensitiveDelay(unsigned long milliseconds)
+	static inline void HandleNonBlockingInterruptDelay(unsigned long msDuration)
 	{
-		cli(); //인터럽트 비활성화
-		delay(milliseconds);
-		sei(); //인터럽트 재활성화
+		unsigned long startMs = millis(); //호출 시점의 시간 (ms)
+
+		while (millis() - startMs >= msDuration) //대기해야 할 시간만큼 대기
+		{
+			//do nothing
+		}
 	}
 
 	/// <summary>
-	/// Time Sensitive한  마이크로초 단위 지연 수행
+	/// 마이크로초 단위 지연 수행 (인터럽트 비차단)
 	/// </summary>
-	/// <param name="microseconds">마이크로초 단위 시간</param>
-	static inline void HandleTimeSensitiveDelayMs(unsigned int microseconds)
+	/// <param name="usDuration">지연이 수행 될 마이크로초 단위 시간</param>
+	static inline void HandleNonBlockingInterruptDelayMs(unsigned long usDuration)
 	{
-		cli(); //인터럽트 비활성화
-		delayMicroseconds(microseconds);
-		sei(); //인터럽트 재활성화
+		unsigned long startUs = micros(); //호출 시점의 시간 (us)
+
+		while (micros() - startUs >= usDuration) //대기해야 할 시간만큼 대기
+		{
+			//do nothing
+		}
 	}
 
 private:
