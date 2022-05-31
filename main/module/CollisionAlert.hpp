@@ -57,6 +57,10 @@ public:
 		uint8_t brightness = this->GetBrightnessFromGl5537(); //주변 밝기
 		DISTANCE_CM distanceCm = this->GetDistanceCmFromHcsr04(); //전방, 후방 장애물과의 cm단위 거리
 
+		VAR_DUMP(brightness);
+		VAR_DUMP(distanceCm._backwardCm);
+		VAR_DUMP(distanceCm._forwardCm);
+
 		if (distanceCm._backwardCm <= COLLISION_ALERT_CM_THRESHOLD ||
 			distanceCm._forwardCm <= COLLISION_ALERT_CM_THRESHOLD) //전방 혹은 후방 장애물과의 cm단위 거리가 임계 값 이하일 경우
 		{

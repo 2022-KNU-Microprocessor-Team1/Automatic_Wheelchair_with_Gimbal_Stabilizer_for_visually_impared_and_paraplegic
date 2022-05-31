@@ -10,7 +10,7 @@
 #define NUM_OF_SHIFT_REG 1 //쉬프트 레지스터 개수
 #define SHIFT_REG_OUTPUT_PIN_COUNT (NUM_OF_SHIFT_REG * 8) //쉬프트 레지스터의 총 출력 핀 개수
 #define SHIFT_REG_PWM_RESOLUTION (MAX_PWM_VALUE) //쉬프트 레지스터 PWM 출력 위한 해상도 (1 ~ 255)
-#define TIMER_INTERRUPT_MS 10 //하드웨어 타이머에 의한 인터럽트 발생 단위 시간 (ms)
+#define TIMER3_INTERRUPT_MS 10 //하드웨어 타이머 3에 의한 인터럽트 발생 단위 시간 (ms)
 
 void COMMON_SHIFT_REG_PWM_InterruptServiceRoutine_Wrapper();
 
@@ -42,7 +42,7 @@ public:
 		this->_shiftRegPwm = new ShiftRegisterPWM(NUM_OF_SHIFT_REG, SHIFT_REG_PWM_RESOLUTION);
 
 		//하드웨어 타이머 3 사용, 타이머에 의해 인터럽트 발생 시마다 시프트 레지스터 출력 갱신
-		Timer3.initialize(TIMER_INTERRUPT_MS);
+		Timer3.initialize(TIMER3_INTERRUPT_MS);
 		Timer3.attachInterrupt(&COMMON_SHIFT_REG_PWM_InterruptServiceRoutine_Wrapper);
 	}
 

@@ -4,6 +4,8 @@
 #include "../Wheelchair_Core.h"
 #include "../extern_lib/Servo-avr-custom/Servo.hpp" // https://github.com/arduino-libraries/Servo
 
+static uint8_t INIT_SERVO_ANGLE = 90; //초기 서보 회전 각도
+
 /// <summary>
 /// 수평 유지 장치
 /// </summary>

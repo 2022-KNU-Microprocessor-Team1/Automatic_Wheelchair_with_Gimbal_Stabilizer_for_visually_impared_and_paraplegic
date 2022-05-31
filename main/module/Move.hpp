@@ -11,7 +11,7 @@
 ***/
 #include "../extern_lib/IRremote-custom/src/IRremote.h" // https://github.com/Arduino-IRremote/Arduino-IRremote
 
-#define MAX_WHEEL_ROTATE_SPEED (MAX_PWM_VALUE / 3) //최대 바퀴 회전 속도
+static uint8_t MAX_WHEEL_ROTATE_SPEED = (MAX_PWM_VALUE / 3); //최대 바퀴 회전 속도
 
 /// <summary>
 /// 적외선 통신 Car MP3 SE-020401 리모콘 원시 데이터<para>
@@ -110,6 +110,8 @@ private:
 
 		if (this->_irrecv.decode()) //적외선 신호로부터 복호화 된 데이터가 존재하면
 		{
+			VAR_DUMP(IrReceiver.decodedIRData.decodedRawData);
+
 			switch (IrReceiver.decodedIRData.decodedRawData) //복호화 된 원시 데이터에 따라
 			{
 			case static_cast<uint32_t>(IR_REMOTE_SE_020401_RAWDATA::N2): //전진

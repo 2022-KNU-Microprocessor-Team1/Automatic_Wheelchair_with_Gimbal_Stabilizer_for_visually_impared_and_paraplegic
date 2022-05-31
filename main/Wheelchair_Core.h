@@ -23,7 +23,7 @@
 #include <stdint.h>
 #include <Arduino.h> // https://github.com/arduino/ArduinoCore-avr
 
-#pragma message("--- Target Architecture ---")
+#pragma message("--- Compile Target Architecture ---")
 #if defined(ARDUINO_ARCH_AVR)
 #pragma message("ARDUINO_ARCH_AVR")
 #elif defined(ARDUINO_ARCH_SAM)
@@ -40,6 +40,10 @@
 #pragma message("ARDUINO_ARCH_MBED")
 #else
 #error "Unknown Architecture"
+#endif
+
+#if !defined(__AVR_ATmega1280__) && !defined(__AVR_ATmega2560__)
+#error "Invalid Architecture"
 #endif
 
 #include "./template/Singleton.hpp"
