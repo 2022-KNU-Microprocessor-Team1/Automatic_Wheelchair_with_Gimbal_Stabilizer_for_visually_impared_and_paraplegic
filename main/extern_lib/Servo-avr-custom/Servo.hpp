@@ -1,5 +1,5 @@
 /***
-	< ARDUINO_ARCH_AVR 전용 서보 >
+	< ARDUINO_ARCH_AVR 전용 서보 라이브러리 >
 
 	- Arduino IDE에 통합되지 않은 라이브러리가 .ino 파일과 완전히 동일한 디렉터리에 존재하지 않을 경우, 
 	링커 오류가 발생하여, 선언 및 정의 통합

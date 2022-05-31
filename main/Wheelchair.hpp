@@ -45,7 +45,9 @@ public:
 	/// </summary>
 	void RunTask()
 	{
-
+		this->_move.RunTask();
+		this->_collisionAlert.RunTask();
+		this->_gimbalStabilizer.RunTask();
 	}
 
 private:

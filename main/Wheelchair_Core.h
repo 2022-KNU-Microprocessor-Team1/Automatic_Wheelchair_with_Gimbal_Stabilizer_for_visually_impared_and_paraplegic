@@ -45,6 +45,7 @@
 #include "./template/Singleton.hpp"
 #include "./Wheelchair_Pin.h"
 
+#include "./module/TimeSensitiveJobHandler.hpp"
 #include "./module/CommonShiftRegPwm.hpp"
 #include "./module/Move.hpp"
 #include "./module/GimbalStabilizer.hpp"

@@ -53,5 +53,8 @@
     <ClInclude Include="module\CommonShiftRegPwm.hpp">
       <Filter>소스 파일</Filter>
     </ClInclude>
+    <ClInclude Include="module\TimeSensitiveJobHandler.hpp">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

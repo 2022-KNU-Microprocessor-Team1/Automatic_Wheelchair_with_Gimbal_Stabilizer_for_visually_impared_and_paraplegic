@@ -29,6 +29,7 @@
     <ClInclude Include="module\CollisionAlert.hpp" />
     <ClInclude Include="module\CommonShiftRegPwm.hpp" />
     <ClInclude Include="module\GimbalStabilizer.hpp" />
+    <ClInclude Include="module\TimeSensitiveJobHandler.hpp" />
     <ClInclude Include="template\Singleton.hpp" />
     <ClInclude Include="Wheelchair.hpp" />
     <ClInclude Include="Wheelchair_Core.h" />

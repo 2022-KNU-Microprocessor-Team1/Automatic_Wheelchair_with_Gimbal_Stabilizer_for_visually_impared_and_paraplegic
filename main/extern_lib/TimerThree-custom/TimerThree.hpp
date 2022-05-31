@@ -1,3 +1,10 @@
+/***
+	< 하드웨어 타이머 3 라이브러리 >
+
+	- Arduino IDE에 통합되지 않은 라이브러리가 .ino 파일과 완전히 동일한 디렉터리에 존재하지 않을 경우, 
+	링커 오류가 발생하여, 선언 및 정의 통합
+***/
+
 /*
  *  Interrupt and PWM utilities for 16 bit Timer3 on ATmega168/328
  *  Original code by Jesse Tane for http://labs.ideo.com August 2008
@@ -14,8 +21,8 @@
  *
  */
 
-#ifndef TimerThree_h_
-#define TimerThree_h_
+#ifndef _TIMER_THREE_HPP_
+#define _TIMER_THREE_HPP_
 
 #if defined(ARDUINO) && ARDUINO >= 100
 #include "Arduino.h"
@@ -472,7 +479,42 @@ class TimerThree
 #endif
 };
 
-extern TimerThree Timer3;
+TimerThree Timer3;              // preinstatiate
 
+unsigned short TimerThree::pwmPeriod = 0;
+unsigned char TimerThree::clockSelectBits = 0;
+void (*TimerThree::isrCallback)() = TimerThree::isrDefaultUnused;
+
+// interrupt service routine that wraps a user defined function supplied by attachInterrupt
+#if defined(__AVR__)
+ISR(TIMER3_OVF_vect)
+{
+	Timer3.isrCallback();
+}
+
+#elif defined(__arm__) && defined(TEENSYDUINO) && (defined(KINETISK) || defined(KINETISL))
+void ftm2_isr(void)
+{
+	uint32_t sc = FTM2_SC;
+#ifdef KINETISL
+	if (sc & 0x80) FTM2_SC = sc;
+#else
+	if (sc & 0x80) FTM2_SC = sc & 0x7F;
+#endif
+	Timer3.isrCallback();
+}
+
+#elif defined(__arm__) && defined(TEENSYDUINO) && defined(__IMXRT1062__)
+void TimerThree::isr(void)
+{
+	FLEXPWM2_SM2STS = FLEXPWM_SMSTS_RF;
+	Timer3.isrCallback();
+}
+
+#endif
+
+void TimerThree::isrDefaultUnused()
+{
+}
 #endif
 

@@ -4,12 +4,12 @@
 #include "../Wheelchair_Core.h"
 
 /***
- 	< 하드웨어 타이머 변경 >
+ 	< IRremote 라이브러리 하드웨어 타이머 변경 >
 
-	../extern_lib/IRremote/src/private/IRTimer.hpp : 77행
+	..src/private/IRTimer.hpp : 77행
 	(하드웨어 타이머 2 => 하드웨어 타이머 4)
 ***/
-#include "../extern_lib/IRremote/src/IRremote.h" // https://github.com/Arduino-IRremote/Arduino-IRremote
+#include "../extern_lib/IRremote-custom/src/IRremote.h" // https://github.com/Arduino-IRremote/Arduino-IRremote
 
 #define MAX_WHEEL_ROTATE_SPEED (MAX_PWM_VALUE / 3) //최대 바퀴 회전 속도
 
@@ -163,8 +163,8 @@ private:
 		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_wheel_pin::H_BRIDGE_LEFT_EN_OUTPUT, LOW);
 		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_wheel_pin::H_BRIDGE_RIGHT_EN_OUTPUT, LOW);
 
-		int leftWheelRotateSpeed = 0; //왼쪽 바퀴 회전 속도
-		int rightWheelRotateSpeed = 0; //오른쪽 바퀴 회전 속도
+		uint8_t leftWheelRotateSpeed = 0; //왼쪽 바퀴 회전 속도
+		uint8_t rightWheelRotateSpeed = 0; //오른쪽 바퀴 회전 속도
 
 		switch (moveDirection) //이동 방향에 따라 각 바퀴의 이동 속도 할당
 		{

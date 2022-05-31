@@ -107,10 +107,10 @@ private:
 
 		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collision_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, LOW);
 		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collision_alert_pin::HCSR04_FORWARD_TRIG_OUTPUT, LOW);
-		delayMicroseconds(5);
+		TIME_SENSITIVE_JOB_HANDLER::HandleTimeSensitiveDelayMs(5);
 		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collision_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, HIGH);
 		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collision_alert_pin::HCSR04_FORWARD_TRIG_OUTPUT, HIGH);
-		delayMicroseconds(10);
+		TIME_SENSITIVE_JOB_HANDLER::HandleTimeSensitiveDelayMs(10);
 		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collision_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, LOW);
 		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_collision_alert_pin::HCSR04_FORWARD_TRIG_OUTPUT, LOW);
 
