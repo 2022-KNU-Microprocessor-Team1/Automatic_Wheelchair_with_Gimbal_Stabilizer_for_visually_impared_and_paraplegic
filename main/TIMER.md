@@ -3,7 +3,7 @@
 ---
 
 | Timer | Control Pin | Usage |
-|:---|:---|
+|:---|:---|:---|
 | Timer 0 (8bit) | 4, 13 | millis(), micros(), delay() |
 | Timer 1 (16bit) | 11, 12 | 서보 모터 제어 (Servo-avr-custom) |
 | Timer 2 (8bit) | 9, 10 | tone() | 
