@@ -29,12 +29,12 @@ public:
 	/// <summary>
 	/// 밀리초 단위 지연 수행 (인터럽트 비차단)
 	/// </summary>
-	/// <param name="milliseconds">밀리초 단위 시간</param>
+	/// <param name="msDuration">밀리초 단위 시간</param>
 	static inline void HandleNonBlockingInterruptDelay(unsigned long msDuration)
 	{
 		unsigned long startMs = millis(); //호출 시점의 시간 (ms)
 
-		while (millis() - startMs >= msDuration) //대기해야 할 시간만큼 대기
+		while (millis() - startMs < msDuration) //대기해야 할 시간만큼 대기
 		{
 			//do nothing
 		}
@@ -48,7 +48,7 @@ public:
 	{
 		unsigned long startUs = micros(); //호출 시점의 시간 (us)
 
-		while (micros() - startUs >= usDuration) //대기해야 할 시간만큼 대기
+		while (micros() - startUs < usDuration) //대기해야 할 시간만큼 대기
 		{
 			//do nothing
 		}
