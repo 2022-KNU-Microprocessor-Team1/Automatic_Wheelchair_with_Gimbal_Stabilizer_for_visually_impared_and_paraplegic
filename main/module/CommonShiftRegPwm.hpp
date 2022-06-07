@@ -3,9 +3,9 @@
 
 #include "../Wheelchair_Core.h"
 
-#define ShiftRegisterPWM_CUSTOM_INTERRUPT
-#include "../extern_lib/ShiftRegister-PWM-Library/ShiftRegisterPWM.h" // https://github.com/Simsso/ShiftRegister-PWM-Library
-#include "../extern_lib/TimerThree-custom/TimerThree.hpp" // https://github.com/PaulStoffregen/TimerThree
+#define ShiftRegisterPWM_CUSTOM_INTERRUPT //하드웨어 타이머 3 사용 (Default : 하드웨어 타이머 1)
+#include <ShiftRegisterPWM.h> // https://github.com/Simsso/ShiftRegister-PWM-Library
+#include <TimerThree.h> // https://github.com/PaulStoffregen/TimerThree
 
 #define NUM_OF_SHIFT_REG 1 //쉬프트 레지스터 개수
 #define SHIFT_REG_OUTPUT_PIN_COUNT (NUM_OF_SHIFT_REG * 8) //쉬프트 레지스터의 총 출력 핀 개수

@@ -2,14 +2,7 @@
 #define _MOVE_HPP_
 
 #include "../Wheelchair_Core.h"
-
-/***
- 	< IRremote 라이브러리 하드웨어 타이머 변경 >
-
-	..src/private/IRTimer.hpp : 77행
-	(하드웨어 타이머 2 => 하드웨어 타이머 4)
-***/
-#include "../extern_lib/IRremote-custom/src/IRremote.h" // https://github.com/Arduino-IRremote/Arduino-IRremote
+#include <IRremote-custom.h> // https://github.com/Arduino-IRremote/Arduino-IRremote
 
 static uint8_t MAX_WHEEL_ROTATE_SPEED = (MAX_PWM_VALUE / 3); //최대 바퀴 회전 속도
 

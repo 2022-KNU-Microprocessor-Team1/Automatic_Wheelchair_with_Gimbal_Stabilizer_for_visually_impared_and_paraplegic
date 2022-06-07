@@ -2,7 +2,7 @@
 #define _GIMBAL_STABILIZER_HPP_
 
 #include "../Wheelchair_Core.h"
-#include "../extern_lib/Servo-avr-custom/Servo.hpp" // https://github.com/arduino-libraries/Servo
+#include <Servo-avr-custom.h> // https://github.com/arduino-libraries/Servo
 
 static uint8_t INIT_SERVO_ANGLE = 90; //초기 서보 회전 각도
 
