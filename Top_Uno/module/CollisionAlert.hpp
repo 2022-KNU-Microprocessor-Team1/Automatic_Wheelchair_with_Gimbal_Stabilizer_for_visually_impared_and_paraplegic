@@ -48,8 +48,8 @@ public:
 		pinMode(collision_alert_pin::HCSR04_FORWARD_TRIG_OUTPUT, OUTPUT);
 		pinMode(collision_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, OUTPUT);
 
-		pinMode(collision_alert_pin::PIEZO_OUTPUT, OUTPUT);
-		pinMode(collision_alert_pin::LED_OUTPUT, OUTPUT);
+		//pinMode(collision_alert_pin::PIEZO_OUTPUT, OUTPUT);
+		//pinMode(collision_alert_pin::LED_OUTPUT, OUTPUT);
 	}
 
 	/// <summary>
@@ -103,19 +103,18 @@ private:
 	/// <returns>물체와의 cm 단위 거리</returns>
 	DISTANCE_CM GetDistanceCmFromHcsr04() const
 	{
-	
 		// https://randomnerdtutorials.com/complete-guide-for-ultrasonic-sensor-hc-sr04/
 		// https://www.arduino.cc/reference/ko/language/functions/advanced-io/pulsein/
 		//10마이크로초 이상 길이 (HIGH에 대한)의 펄스를 트리거 핀에 주어 작동 시작
 
 		analogWrite(collision_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, LOW);
 		analogWrite(collision_alert_pin::HCSR04_FORWARD_TRIG_OUTPUT, LOW);
-		TIME_SENSITIVE_JOB_HANDLER::HandleNonBlockingInterruptDelayMs(5);
-		//delayMicroseconds(5);
+		//TIME_SENSITIVE_JOB_HANDLER::HandleNonBlockingInterruptDelayMs(5);
+		delayMicroseconds(5);
 		analogWrite(collision_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, HIGH);
 		analogWrite(collision_alert_pin::HCSR04_FORWARD_TRIG_OUTPUT, HIGH);
-		TIME_SENSITIVE_JOB_HANDLER::HandleNonBlockingInterruptDelayMs(10);
-		//delayMicroseconds(10);
+		//TIME_SENSITIVE_JOB_HANDLER::HandleNonBlockingInterruptDelayMs(10);
+		delayMicroseconds(10);
 		analogWrite(collision_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, LOW);
 		analogWrite(collision_alert_pin::HCSR04_FORWARD_TRIG_OUTPUT, LOW);
 
@@ -127,6 +126,8 @@ private:
 		retVal._forwardCm =
 			pulseIn(collision_alert_pin::HCSR04_FORWARD_ECHO_INPUT, HIGH);
 
+		VAR_DUMP(retVal._backwardCm);
+		VAR_DUMP(retVal._forwardCm);
 		/***
 			- 20도의 공기 중 음속 : 343m/s (0.034cm/µs)
 			- 거리 = 시간 * 속도

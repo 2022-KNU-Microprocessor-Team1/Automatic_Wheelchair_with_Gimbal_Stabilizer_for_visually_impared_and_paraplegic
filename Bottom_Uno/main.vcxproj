@@ -20,13 +20,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
+    <None Include="Bottom_Uno.ino" />
     <None Include="README.md" />
     <None Include="TIMER.md" />
-    <None Include="Top_Uno.ino" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="module\CollisionAlert.hpp" />
-    <ClInclude Include="module\GimbalStabilizer.hpp" />
+    <ClInclude Include="module\Move.hpp" />
     <ClInclude Include="module\TimeSensitiveJobHandler.hpp" />
     <ClInclude Include="template\Singleton.hpp" />
     <ClInclude Include="Wheelchair.hpp" />

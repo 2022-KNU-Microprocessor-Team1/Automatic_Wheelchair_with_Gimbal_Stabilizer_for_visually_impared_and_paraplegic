@@ -24,7 +24,7 @@
     <None Include="README.md">
       <Filter>소스 파일</Filter>
     </None>
-    <None Include="Top_Uno.ino">
+    <None Include="Bottom_Uno.ino">
       <Filter>소스 파일</Filter>
     </None>
   </ItemGroup>
@@ -38,13 +38,10 @@
     <ClInclude Include="template\Singleton.hpp">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="module\CollisionAlert.hpp">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="module\GimbalStabilizer.hpp">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Wheelchair.hpp">
+      <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="module\Move.hpp">
       <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="module\TimeSensitiveJobHandler.hpp">

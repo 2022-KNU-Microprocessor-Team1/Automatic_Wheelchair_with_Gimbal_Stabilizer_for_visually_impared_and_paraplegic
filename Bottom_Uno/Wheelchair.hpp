@@ -28,8 +28,7 @@ public:
 	/// </summary>
 	void Init()
 	{
-		//this->_collisionAlert.Init();
-		this->_gimbalStabilizer.Init();
+		this->_move.Init();
 	}
 
 	/// <summary>
@@ -37,12 +36,10 @@ public:
 	/// </summary>
 	void RunTask()
 	{
-		//this->_collisionAlert.RunTask();
-		this->_gimbalStabilizer.RunTask();
+		this->_move.RunTask();
 	}
 
 private:
-	GIMBAL_STABILIZER _gimbalStabilizer; //수평 안정화 장치
-	COLLISION_ALERT _collisionAlert; //충돌 경고
+	MOVE _move;
 };
 #endif
