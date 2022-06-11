@@ -1,0 +1,31 @@
+#ifndef _WHEELCHAIR_PIN_H_
+#define _WHEELCHAIR_PIN_H_
+
+/// <summary>
+/// 충돌 경고 위한 핀 정의
+/// </summary>
+namespace collision_alert_pin
+{
+	const uint8_t HCSR04_BACKWARD_TRIG_OUTPUT = 0; //후방 장애물 감지 초음파 센서 트리거 핀 (PWM)
+	const uint8_t HCSR04_FORWARD_TRIG_OUTPUT = 1; //전방 장애물 감지 초음파 센서 트리거 핀 (PWM)
+
+	const int HCSR04_BACKWARD_ECHO_INPUT = 13; //후방 장애물 감지 초음파 센서 에코 핀
+	const int HCSR04_FORWARD_ECHO_INPUT = 12; //전방 장애물 감지 초음파 센서 에코 핀
+
+	const int GL5537_ANALOG_INPUT = A0; //조도 센서 (ANALOG)
+	const uint8_t PIEZO_OUTPUT = 7; //충돌 경고 피에조 부저
+	const uint8_t LED_OUTPUT = 6; //충돌 경고 LED (PWM)
+}
+
+/// <summary>
+/// 수평 유지 장치에 대한 핀 정의
+/// </summary>
+namespace gimbal_pin
+{
+	const int X_AXIS_SERVO_OUTPUT = 9; //x축에 대한 서보 모터 (PWM)
+	const int Y_AXIS_SERVO_OUTPUT = 10; //y축에 대한 서보 모터 (PWM)
+
+	const int X_AXIS_GIMBAL_INPUT = A1; //x축에 대한 기울기 센서
+	const int Y_AXIS_GIMBAL_INPUT = A2; //y축에 대한 기울기 센서
+}
+#endif
