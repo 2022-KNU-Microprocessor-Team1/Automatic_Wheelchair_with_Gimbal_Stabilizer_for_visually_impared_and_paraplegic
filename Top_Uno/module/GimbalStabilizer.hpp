@@ -71,7 +71,7 @@ public:
 	void RunTask()
 	{
 		this->GimbalStabilize(this->GetDipAngleXY());
-		TIME_SENSITIVE_JOB_HANDLER::HandleNonBlockingInterruptDelay(50);
+		//TIME_SENSITIVE_JOB_HANDLER::HandleNonBlockingInterruptDelay(100);
 	}
 
 private:
@@ -83,7 +83,7 @@ private:
 	{
 		this->_xAxisServo.write(INIT_SERVO_X_ANGLE + dipAngleXY._xAngle);
 		this->_yAxisServo.write(INIT_SERVO_Y_ANGLE + dipAngleXY._yAngle);
-		TIME_SENSITIVE_JOB_HANDLER::HandleNonBlockingInterruptDelay(50);
+		TIME_SENSITIVE_JOB_HANDLER::HandleNonBlockingInterruptDelay(100);
 	}
 	
 	/// <summary>

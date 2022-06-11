@@ -43,10 +43,10 @@ public:
 	/// </summary>
 	void Init() const
 	{
-		pinMode(collision_alert_pin::HCSR04_BACKWARD_ECHO_INPUT, INPUT);
+		//pinMode(collision_alert_pin::HCSR04_BACKWARD_ECHO_INPUT, INPUT);
 		pinMode(collision_alert_pin::HCSR04_FORWARD_ECHO_INPUT, INPUT);
 		pinMode(collision_alert_pin::HCSR04_FORWARD_TRIG_OUTPUT, OUTPUT);
-		pinMode(collision_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, OUTPUT);
+		//pinMode(collision_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, OUTPUT);
 
 		pinMode(collision_alert_pin::PIEZO_OUTPUT, OUTPUT);
 		pinMode(collision_alert_pin::LED_OUTPUT, OUTPUT);
@@ -64,19 +64,20 @@ public:
 		VAR_DUMP(distanceCm._backwardCm);
 		VAR_DUMP(distanceCm._forwardCm);
 
-		if (distanceCm._backwardCm <= COLLISION_ALERT_CM_THRESHOLD ||
-			distanceCm._forwardCm <= COLLISION_ALERT_CM_THRESHOLD) //전방 혹은 후방 장애물과의 cm단위 거리가 임계 값 이하일 경우
+		//if (distanceCm._backwardCm <= COLLISION_ALERT_CM_THRESHOLD ||
+		//	distanceCm._forwardCm <= COLLISION_ALERT_CM_THRESHOLD) //전방 혹은 후방 장애물과의 cm단위 거리가 임계 값 이하일 경우
+		if (distanceCm._forwardCm <= COLLISION_ALERT_CM_THRESHOLD)
 		{
 			analogWrite(collision_alert_pin::LED_OUTPUT,
 				map(brightness,
 					MIN_PWM_VALUE, MAX_PWM_VALUE,
 					MAX_PWM_VALUE, MIN_PWM_VALUE)); //주변이 밝을 경우 최소 밝기 출력, 어두울 경우 최대 밝기 출력
-			analogWrite(collision_alert_pin::PIEZO_OUTPUT, MAX_PWM_VALUE);
+			tone(collision_alert_pin::PIEZO_OUTPUT, 1000);
 		}
 		else //인접 한 장애물이 존재하지 않을 경우
 		{
 			analogWrite(collision_alert_pin::LED_OUTPUT, MIN_PWM_VALUE);
-			analogWrite(collision_alert_pin::PIEZO_OUTPUT, MIN_PWM_VALUE);
+			noTone(collision_alert_pin::PIEZO_OUTPUT);
 		}
 	}
 
@@ -107,26 +108,26 @@ private:
 		// https://www.arduino.cc/reference/ko/language/functions/advanced-io/pulsein/
 		//10마이크로초 이상 길이 (HIGH에 대한)의 펄스를 트리거 핀에 주어 작동 시작
 
-		analogWrite(collision_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, LOW);
-		analogWrite(collision_alert_pin::HCSR04_FORWARD_TRIG_OUTPUT, LOW);
-		//TIME_SENSITIVE_JOB_HANDLER::HandleNonBlockingInterruptDelayMs(5);
-		delayMicroseconds(5);
-		analogWrite(collision_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, HIGH);
-		analogWrite(collision_alert_pin::HCSR04_FORWARD_TRIG_OUTPUT, HIGH);
-		//TIME_SENSITIVE_JOB_HANDLER::HandleNonBlockingInterruptDelayMs(10);
-		delayMicroseconds(10);
-		analogWrite(collision_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, LOW);
-		analogWrite(collision_alert_pin::HCSR04_FORWARD_TRIG_OUTPUT, LOW);
+		//digitalWrite(collision_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, LOW);
+		digitalWrite(collision_alert_pin::HCSR04_FORWARD_TRIG_OUTPUT, LOW);
+		TIME_SENSITIVE_JOB_HANDLER::HandleNonBlockingInterruptDelayMs(5);
+		//delayMicroseconds(5);
+		//digitalWrite(collision_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, HIGH);
+		digitalWrite(collision_alert_pin::HCSR04_FORWARD_TRIG_OUTPUT, HIGH);
+		TIME_SENSITIVE_JOB_HANDLER::HandleNonBlockingInterruptDelayMs(10);
+		//delayMicroseconds(10);
+		//digitalWrite(collision_alert_pin::HCSR04_BACKWARD_TRIG_OUTPUT, LOW);
+		digitalWrite(collision_alert_pin::HCSR04_FORWARD_TRIG_OUTPUT, LOW);
 
 		DISTANCE_CM retVal = { 0, };
 
 		//HIGH 신호가 ECHO에 수신 될 때까지 측정 된 마이크로초 단위 시간
-		retVal._backwardCm =
-			pulseIn(collision_alert_pin::HCSR04_BACKWARD_ECHO_INPUT, HIGH);
+		//retVal._backwardCm =
+		//	pulseIn(collision_alert_pin::HCSR04_BACKWARD_ECHO_INPUT, HIGH);
 		retVal._forwardCm =
 			pulseIn(collision_alert_pin::HCSR04_FORWARD_ECHO_INPUT, HIGH);
 
-		VAR_DUMP(retVal._backwardCm);
+		//VAR_DUMP(retVal._backwardCm);
 		VAR_DUMP(retVal._forwardCm);
 		/***
 			- 20도의 공기 중 음속 : 343m/s (0.034cm/µs)
@@ -139,7 +140,7 @@ private:
 		***/
 
 		//물체와의 cm 단위 거리 계산
-		retVal._backwardCm = (retVal._backwardCm * 0.034) / 2;
+		//retVal._backwardCm = (retVal._backwardCm * 0.034) / 2;
 		retVal._forwardCm = (retVal._forwardCm * 0.034) / 2;
 
 		return retVal;

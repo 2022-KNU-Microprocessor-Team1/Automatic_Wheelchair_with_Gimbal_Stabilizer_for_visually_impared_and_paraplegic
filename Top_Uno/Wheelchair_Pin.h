@@ -11,7 +11,7 @@ namespace collision_alert_pin
 	const int HCSR04_BACKWARD_ECHO_INPUT = 4; //후방 장애물 감지 초음파 센서 에코 핀
 	const int HCSR04_FORWARD_ECHO_INPUT = 2; //전방 장애물 감지 초음파 센서 에코 핀
 
-	const int GL5537_ANALOG_INPUT = A1; //조도 센서 (ANALOG)
+	const int GL5537_ANALOG_INPUT = A0; //조도 센서 (ANALOG)
 	const int PIEZO_OUTPUT = 7; //충돌 경고 피에조 부저
 	const int LED_OUTPUT = 6; //충돌 경고 LED (PWM)
 }
