@@ -3,14 +3,14 @@
 
 #include "../Wheelchair_Core.h"
 
-#define ShiftRegisterPWM_CUSTOM_INTERRUPT //하드웨어 타이머 3 사용 (Default : 하드웨어 타이머 1)
+//#define ShiftRegisterPWM_CUSTOM_INTERRUPT //하드웨어 타이머 3 사용 (Default : 하드웨어 타이머 1)
 #include <ShiftRegisterPWM.h> // https://github.com/Simsso/ShiftRegister-PWM-Library
-#include <TimerThree.h> // https://github.com/PaulStoffregen/TimerThree
+//#include <TimerThree.h> // https://github.com/PaulStoffregen/TimerThree
 
 #define NUM_OF_SHIFT_REG 1 //쉬프트 레지스터 개수
 #define SHIFT_REG_OUTPUT_PIN_COUNT (NUM_OF_SHIFT_REG * 8) //쉬프트 레지스터의 총 출력 핀 개수
 #define SHIFT_REG_PWM_RESOLUTION (MAX_PWM_VALUE) //쉬프트 레지스터 PWM 출력 위한 해상도 (1 ~ 255)
-#define TIMER3_INTERRUPT_MS 10 //하드웨어 타이머 3에 의한 인터럽트 발생 단위 시간 (ms)
+#define TIMER3_INTERRUPT_MICROSECONDS 5000 //하드웨어 타이머 3에 의한 인터럽트 발생 단위 시간 (마이크로초)
 
 void COMMON_SHIFT_REG_PWM_InterruptServiceRoutine_Wrapper();
 
@@ -40,10 +40,10 @@ public:
 
 		this->ClearPwmData();
 		this->_shiftRegPwm = new ShiftRegisterPWM(NUM_OF_SHIFT_REG, SHIFT_REG_PWM_RESOLUTION);
-
+		this->_shiftRegPwm->interrupt(ShiftRegisterPWM::UpdateFrequency::SuperFast); //하드웨어 타이머 1 사용
 		//하드웨어 타이머 3 사용, 타이머에 의해 인터럽트 발생 시마다 시프트 레지스터 출력 갱신
-		Timer3.initialize(TIMER3_INTERRUPT_MS);
-		Timer3.attachInterrupt(&COMMON_SHIFT_REG_PWM_InterruptServiceRoutine_Wrapper);
+		//Timer3.initialize(TIMER3_INTERRUPT_MS);
+		//Timer3.attachInterrupt(&COMMON_SHIFT_REG_PWM_InterruptServiceRoutine_Wrapper);
 	}
 
 	/// <summary>
@@ -52,6 +52,7 @@ public:
 	void ClearPwmData()
 	{
 		memset(this->_pwmData, MIN_PWM_VALUE, (sizeof(unsigned char) * SHIFT_REG_OUTPUT_PIN_COUNT));
+		//this->InterruptServiceRoutine();
 	}
 
 	/// <summary>
@@ -73,6 +74,7 @@ public:
 		***/
 
 		this->_pwmData[(SHIFT_REG_OUTPUT_PIN_COUNT - index)] = pwmData;
+		this->InterruptServiceRoutine();
 	}
 
 	/// <summary>
@@ -83,7 +85,7 @@ public:
 		for (uint8_t i = 0; i < 8; i++) //마지막으로 할당 된 PWM 값 할당
 			this->_shiftRegPwm->set(i, this->_pwmData[i]);
 
-		this->_shiftRegPwm->update();
+		//this->_shiftRegPwm->update();
 	}
 
 private:

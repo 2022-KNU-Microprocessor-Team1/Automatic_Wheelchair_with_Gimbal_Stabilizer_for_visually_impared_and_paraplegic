@@ -57,8 +57,8 @@ namespace gimbal_pin
 	const int Y_AXIS_SERVO_OUTPUT = 9; //y축에 대한 서보 모터 (PWM)
 
 	//TODO : 기울기 센서 아날로그 입력 혹은 디지털 입력 테스트
-	const int X_AXIS_GIMBAL_INPUT = 9999; //x축에 대한 기울기 센서
-	const int Y_AXIS_GIMBAL_INPUT = 9999; //y축에 대한 기울기 센서
+	const int X_AXIS_GIMBAL_INPUT = A2; //x축에 대한 기울기 센서
+	const int Y_AXIS_GIMBAL_INPUT = A3; //y축에 대한 기울기 센서
 }
 
 /// <summary>

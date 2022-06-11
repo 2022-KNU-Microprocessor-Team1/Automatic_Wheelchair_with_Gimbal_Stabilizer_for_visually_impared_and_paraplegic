@@ -7,32 +7,32 @@
 static uint8_t MAX_WHEEL_ROTATE_SPEED = (MAX_PWM_VALUE / 3); //최대 바퀴 회전 속도
 
 /// <summary>
-/// 적외선 통신 Car MP3 SE-020401 리모콘 원시 데이터<para>
+/// 적외선 통신 Car MP3 SE-020401 리모콘 명령어<para>
 /// https://gist.github.com/steakknife/e419241095f1272ee60f5174f7759867
 /// </para></summary>
-enum class IR_REMOTE_SE_020401_RAWDATA : const uint32_t
+enum class IR_REMOTE_SE_020401_COMMAND : const uint16_t
 {
-	N0 = 0xFF6897, //0
-	N1 = 0xFF30CF, //1
-	N2 = 0xFF18E7, //2
-	N3 = 0xFF7A85, //3
-	N4 = 0xFF10EF, //4
-	N5 = 0xFF38C7, //5
-	N6 = 0xFF5AA5, //6
-	N7 = 0xFF42BD, //7
-	N8 = 0xFF4AB5, //8
-	N9 = 0xFF52AD, //9
-	N100P = 0xFF9867, //100+
-	N200P = 0xFFB04F, //200+
-	MINUS = 0xFFE01F, //-
-	PLUS = 0xFFA857, //+
-	EQ = 0xFF906F, //EQ
-	PREV = 0xFF22DD, //|<<
-	NEXT = 0xFF02FD, //>>|
-	PLAY = 0xFFC23D, //>||
-	CH_PREV = 0xFFA25D, //CH-
-	CH = 0xFF629D, //CH
-	CH_NEXT = 0xFFE21D //CH+
+	N0 = 22, //0
+	N1 = 12, //1
+	N2 = 24, //2
+	N3 = 94, //3
+	N4 = 8, //4
+	N5 = 28, //5
+	N6 = 90, //6
+	N7 = 66, //7
+	N8 = 82, //8
+	N9 = 74, //9
+	N100P = 25, //100+
+	N200P = 13, //200+
+	MINUS = 7, //-
+	PLUS = 21, //+
+	EQ = 9, //EQ
+	PREV = 68, //|<<
+	NEXT = 64, //>>|
+	PLAY = 67, //>||
+	CH_PREV = 69, //CH-
+	CH = 70, //CH
+	CH_NEXT = 71 //CH+
 };
 
 /// <summary>
@@ -100,38 +100,39 @@ private:
 	MOVE_DIRECTION GetMoveDirectionFromIrRemote()
 	{
 		MOVE_DIRECTION retVal = MOVE_DIRECTION::DO_NOTHING;
+		Serial.println("remote 1");
 
 		if (this->_irrecv.decode()) //적외선 신호로부터 복호화 된 데이터가 존재하면
 		{
-			VAR_DUMP(IrReceiver.decodedIRData.decodedRawData);
+			VAR_DUMP(IrReceiver.decodedIRData.command);
 
-			switch (IrReceiver.decodedIRData.decodedRawData) //복호화 된 원시 데이터에 따라
+			switch (IrReceiver.decodedIRData.command) //복호화 된 명령어에 따라
 			{
-			case static_cast<uint32_t>(IR_REMOTE_SE_020401_RAWDATA::N2): //전진
+			case static_cast<uint16_t>(IR_REMOTE_SE_020401_COMMAND::N2): //전진
 				retVal = MOVE_DIRECTION::FORWARD;
 				break;
 
-			case static_cast<uint32_t>(IR_REMOTE_SE_020401_RAWDATA::N8): //후진
+			case static_cast<uint16_t>(IR_REMOTE_SE_020401_COMMAND::N8): //후진
 				retVal = MOVE_DIRECTION::BACKWARD;
 				break;
 
-			case static_cast<uint32_t>(IR_REMOTE_SE_020401_RAWDATA::N4): //제자리 좌회전
+			case static_cast<uint16_t>(IR_REMOTE_SE_020401_COMMAND::N4): //제자리 좌회전
 				retVal = MOVE_DIRECTION::LEFT;
 				break;
 
-			case static_cast<uint32_t>(IR_REMOTE_SE_020401_RAWDATA::N6): //제자리 우회전
+			case static_cast<uint16_t>(IR_REMOTE_SE_020401_COMMAND::N6): //제자리 우회전
 				retVal = MOVE_DIRECTION::RIGHT;
 				break;
 
-			case static_cast<uint32_t>(IR_REMOTE_SE_020401_RAWDATA::N1): //좌회전 및 전진
+			case static_cast<uint16_t>(IR_REMOTE_SE_020401_COMMAND::N1): //좌회전 및 전진
 				retVal = MOVE_DIRECTION::LEFT_AND_FORWARD;
 				break;
 
-			case static_cast<uint32_t>(IR_REMOTE_SE_020401_RAWDATA::N3): //우회전 및 전진
+			case static_cast<uint16_t>(IR_REMOTE_SE_020401_COMMAND::N3): //우회전 및 전진
 				retVal = MOVE_DIRECTION::RIGHT_AND_FORWARD;
 				break;
 
-			case static_cast<uint32_t>(IR_REMOTE_SE_020401_RAWDATA::N5): //정지
+			case static_cast<uint16_t>(IR_REMOTE_SE_020401_COMMAND::N5): //정지
 				retVal = MOVE_DIRECTION::BRAKE;
 				break;
 
@@ -140,9 +141,9 @@ private:
 				break;
 			}
 
-			this->_irrecv.resume();
+			IrReceiver.resume();
 		}
-
+		Serial.println("remote 2");
 		return retVal;
 	}
 
@@ -152,8 +153,11 @@ private:
 	/// <param name="moveDirection">이동 방향</param>
 	void MoveTo(const MOVE_DIRECTION& moveDirection)
 	{
-		COMMON_SHIFT_REG_PWM& commonShiftRegPwmInstance = COMMON_SHIFT_REG_PWM::GetInstance();
+		if (moveDirection == MOVE_DIRECTION::DO_NOTHING)
+			return;
 
+		COMMON_SHIFT_REG_PWM& commonShiftRegPwmInstance = COMMON_SHIFT_REG_PWM::GetInstance();
+		Serial.println("move 1");
 		//스위치의 상태 변경 전 비활성화 (단락 방지)
 		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_wheel_pin::H_BRIDGE_LEFT_EN_OUTPUT, LOW);
 		commonShiftRegPwmInstance.SetPwmData(shift_reg_pin::inner_wheel_pin::H_BRIDGE_RIGHT_EN_OUTPUT, LOW);

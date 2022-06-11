@@ -48,6 +48,7 @@ public:
 		this->_move.RunTask();
 		this->_collisionAlert.RunTask();
 		this->_gimbalStabilizer.RunTask();
+		Serial.println("wheelchair runtask");
 	}
 
 private:

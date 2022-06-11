@@ -39,5 +39,6 @@ void setup()
 /// </summary>
 void loop()
 {
+  Serial.println("loop");
 	wheelchair.RunTask();
 }
