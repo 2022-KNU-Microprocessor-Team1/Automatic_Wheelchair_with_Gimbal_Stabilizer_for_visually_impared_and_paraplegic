@@ -111,7 +111,7 @@ public:
 				map(brightness,
 					MIN_PWM_VALUE, MAX_PWM_VALUE,
 					MAX_PWM_VALUE, MIN_PWM_VALUE)); //주변이 밝을 경우 최소 밝기 출력, 어두울 경우 최대 밝기 출력
-			tone(collision_alert_pin::PIEZO_OUTPUT, 1000);
+			tone(collision_alert_pin::PIEZO_OUTPUT, NOTE_C6);
 		}
 		else //인접 한 장애물이 존재하지 않을 경우
 		{
